@@ -1,17 +1,16 @@
 # RMIT SEPT 2020 Major Project
 
-# Group 00
+# Group 3.THURS-10.30-3
 
 ## Members
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* Nguyen, Anh (s3616128)
+* Brown, David (s3785894)
+* Gust, Mitchell (s3782095)
+* Lee, SangYeon (s3742751)
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
+* Github repository : https://github.com/RMIT-SEPT/MajorProject-3-thurs-10-30-3
 * ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
 
 
