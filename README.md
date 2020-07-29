@@ -11,7 +11,7 @@
 ## Records
 
 * Github repository : https://github.com/RMIT-SEPT/MajorProject-3-thurs-10-30-3
-* Trello board : https://trello.com/b/PYBbdj8a
+* Trello board : https://trello.com/b/jZ2e1aSF
 
 
 ## Code documentation
