@@ -12,7 +12,7 @@
 
 * Github repository : https://github.com/RMIT-SEPT/MajorProject-3-thurs-10-30-3
 * Trello board : https://trello.com/b/jZ2e1aSF
-
+* Google Drive (require RMIT email): https://bit.ly/2OYPsRL
 
 ## Code documentation
 
