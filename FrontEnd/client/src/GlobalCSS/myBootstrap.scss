@@ -1,0 +1,76 @@
+
+// My custome bootstarp
+a{
+  text-decoration: none;
+  color:black;
+}
+
+#root button{
+  border:0px;
+  color:white;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07), 0 6px 5px 0 rgba(0, 0, 0, 0.07);
+  padding:0.3rem 0.4rem;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+#root a{
+  text-decoration: none;
+}
+
+#root .row{
+  margin:0;
+  padding:0;
+}
+
+.button-red{
+  background:red;
+  border-radius: 10%;
+  /* height:50%; */
+}
+
+.button-blue{
+  background:blueviolet;
+  border-radius: 10%;
+  /* height:50%; */
+}
+
+.button-grey{
+  background:rgb(158, 144, 172);
+  border-radius: 10%;
+  /* height:50%; */
+}
+
+.z-index-2{
+  z-index: 2;
+}
+
+.z-index-3{
+  z-index: 3;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+#root .my-nav-bar input{
+  border:2px solid;
+  border-radius: 0.3rem;
+  border-color:rgb(235, 212, 212);
+  margin:0.5rem 0;
+}
+
+input:focus{
+  outline:none;
+}
+
+.error-cont{
+  color:rgb(209, 41, 41);
+  font-weight: 500;
+  border: 0.1rem solid rgb(212, 173, 173);
+  padding:0.3rem;
+  border-radius: 0.3rem;
+  background-color:  #f5ebeb;
+}
