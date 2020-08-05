@@ -1,0 +1,94 @@
+
+
+#root .signin-container{
+    height:80vh;
+    width:30vw;
+    margin-right:10vw;
+    z-index:1;
+    transition: 0.5s all ease-in-out;
+
+    position: fixed;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 3px 10px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 0.3rem;
+
+    label, input{
+        color:rgb(0, 0, 0);
+    }
+
+    .signin-form{
+        background-color: rgb(255, 255, 255);
+        border-radius: 0.3rem;
+        height:100%;
+        width:100%;
+        color:rgb(0, 0, 0);
+        padding:3rem;
+        // background-image:   url("../img/sign-background2.jpg");
+        background-repeat: no-repeat; 
+        background-position: bottom;
+        // background-size: 100%,100%;
+
+        .signin-header{
+            height:34%;
+            text-align: center;
+        }
+
+        #root .signin-body {
+            height:75%;
+            // font-size:1.2rem;
+        }
+
+        .user-icon{
+            width:30%;
+            height:30%;
+        }
+
+        .signin-button{
+            width:80%;
+            margin-top:1.7rem;
+            transition: all 0.2s ease-in-out;
+            padding:0.7rem 0 0.7rem 0;
+            border-radius: 3rem;
+            // font-weight: 600;
+            font-size:1.2rem;
+            color:rgb(241, 231, 231);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            background: linear-gradient(45deg,rgb(79, 233, 169), rgb(231, 188, 227), rgb(197, 22, 188), rgb(79, 101, 207)) ;
+            // background:linear-gradient(-45deg,  #034479, #053049, rgba(173, 2, 19, 1), rgba(219, 107, 87, 0.7));
+            background-size: 200% 200%;
+
+        }
+        .signin-button:hover{
+            color:rgb(255, 255, 255);
+            // background: linear-gradient(90deg, rgb(231, 188, 227), rgb(197, 22, 188), rgb(79, 101, 207)) ;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+            background-position:50% 50%;
+
+        }
+    }
+}
+
+
+
+
+#root input:focus + label{
+    transform: scale(0.7,0.7) translate(0%, -80%);
+}
+
+#root .label-active{
+    transform: scale(0.7,0.7) translate(0%, -80%);
+}
+
+.sign-up-link{
+    font-weight: 600;
+    color:rgb(214, 176, 176);
+    font-size:1.1rem;
+}
+
+#root .sign-in-slide-down{
+    transform:translateY(0%)
+}
+
+#root .sign-in-slide-up{
+    transform:translateY(-150%);
+    // display:none;
+}

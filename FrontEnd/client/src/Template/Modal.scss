@@ -1,0 +1,20 @@
+
+.modal-background{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(175, 127, 127, 0.5);
+  
+    .modal-cont{
+        background-color: white;
+        // width:30vw;
+        // height:85vh;
+        border-radius: 0.5rem;
+        z-index: 1;
+        position: relative;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07), 0 6px 5px 0 rgba(0, 0, 0, 0.07);
+        /* padding:2rem; */
+    }
+  }
