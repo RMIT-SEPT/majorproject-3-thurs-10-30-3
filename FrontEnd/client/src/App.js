@@ -1,20 +1,25 @@
 import React from 'react';
-import './GlobalCSS/myBootstrap.scss';
-import './GlobalCSS/responsive.scss';
-import Main from './core/Main';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Main} />
-
-        {/* <PrivateRoute path="/dashboard/tours" exact component={Tour} />
-        <PrivateRoute path="/dashboard/locations" exact component={LocationPage} />
-        <AdminRoute path="/dashboard/users" exact component={UserMg} /> */}
-      </Switch>
-    </BrowserRouter>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
