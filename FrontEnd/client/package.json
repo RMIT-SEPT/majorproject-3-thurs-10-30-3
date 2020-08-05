@@ -1,13 +1,20 @@
 {
-  "name": "frontend",
+  "name": "semp_frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.13",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "animejs": "^3.2.0",
+    "node-sass": "^4.14.1",
+    "parallax-js": "^3.1.0",
     "react": "^16.13.1",
+    "react-anime": "^3.0.3",
     "react-dom": "^16.13.1",
+    "react-parallax": "^3.0.3",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
   "scripts": {
