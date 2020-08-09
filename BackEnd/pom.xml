@@ -24,11 +24,10 @@
     </properties>
 
     <modules>
-
         <module>service-registry</module>
         <module>api-gateway</module>
-        <module>account-api</module>
-        <module>auth-api</module>
+        <module>user-service</module>
+        <module>auth-service</module>
     </modules>
 
     <dependencyManagement>
