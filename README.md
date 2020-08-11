@@ -15,5 +15,11 @@
 * Google Drive (require RMIT email): https://bit.ly/2OYPsRL
 
 ## Code documentation
+##
+To run the backend app please install Docker and docker-compose
+```
+cd Backend
+docker-compose up (this does not work yet)
+```
 
 [Quick Start](/docs/README.md) in `docs` folder
