@@ -26,8 +26,6 @@
     <modules>
         <module>service-registry</module>
         <module>api-gateway</module>
-        <module>user-service</module>
-        <module>auth-service</module>
         <module>config-service</module>
     </modules>
 
