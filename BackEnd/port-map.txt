@@ -1,0 +1,3 @@
+config-service= 8888
+service-registry= 8761
+api-gateway= 8080
