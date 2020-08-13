@@ -1,10 +1,7 @@
 package edu.rmit.gateway.controller;
 
 
-import edu.rmit.gateway.model.AuthResponse;
-import edu.rmit.gateway.model.LoginRequest;
-import edu.rmit.gateway.model.RegistrationRequest;
-import edu.rmit.gateway.model.User;
+import edu.rmit.gateway.model.*;
 import edu.rmit.gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,38 +23,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
-        String token = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        String token = userService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
 
-        Map<String, String> res = new HashMap<>();
-
-        res.put("success", "true");
-        res.put("token", token);
-
-        return ResponseEntity.ok(res);
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestHeader(value = "Authorization") String token){
-        HttpHeaders headers = new HttpHeaders();
-        if (userService.logout(token)) {
-            headers.remove("Authorization");
-            return new ResponseEntity<>(new AuthResponse("logged out"), headers, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(new AuthResponse("Logout Failed"), headers, HttpStatus.NOT_MODIFIED);
+        return ResponseEntity.ok(new AuthResponse(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest){
 
-        User user = new User();
-        user.setUsername(registrationRequest.getUsername());
-        user.setEmail(registrationRequest.getEmail());
-        user.setPassword(registrationRequest.getPassword());
-        user.setName(registrationRequest.getName());
-        user.setPhone(registrationRequest.getPhone());
-        user.setAddress(registrationRequest.getAddress());
-
-        userService.saveUser(user);
+        userService.saveUser(registrationRequest);
 
         Map<String, String> res = new HashMap<>();
 
@@ -67,9 +41,4 @@ public class AuthController {
         return ResponseEntity.ok(res);
     }
 
-    @PostMapping("/current")
-    public ResponseEntity<?> getCurrentUserInfo(@RequestHeader(value = "Authorization") String token){
-        userService.testToken(token);
-        return ResponseEntity.ok(token);
-    }
 }

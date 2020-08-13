@@ -1,24 +1,15 @@
 package edu.rmit.gateway.model;
 
 
-import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
 
-@Entity
-@Data
-public class Role {
+public enum Role implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    ADMIN, OWNER, WORKER, CUSTOMER;
 
-    @Column(name = "role", unique = true)
-    private String role;
-
-    public Role(String role) {
-        this.role = role;
+    @Override
+    public String getAuthority() {
+        return name();
     }
-
-
 }
