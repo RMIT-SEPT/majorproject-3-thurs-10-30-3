@@ -30,4 +30,3 @@ spring:
       fail-fast: true
       password: 123456
       username: user
-

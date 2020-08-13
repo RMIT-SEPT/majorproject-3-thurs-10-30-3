@@ -1,4 +1,4 @@
-version: "2.1"
+version: '3.8'
 services:
   config:
     image: usefulmana/config-service
@@ -19,6 +19,7 @@ services:
     restart: always
     depends_on:
       - config
+      - registry
     ports:
       - "8080:8080"
 
