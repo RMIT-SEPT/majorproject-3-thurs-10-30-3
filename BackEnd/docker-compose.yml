@@ -1,28 +1,25 @@
-version: "1"
+version: "2.1"
 services:
   config:
-    image: usefulmana/config-service
+    build: ./config-service
     restart: always
     ports:
-    - 8888:8888
+      - "8888:8888"
 
   registry:
-    image: usefulmana/service-registry
+    build: ./service-registry
     restart: always
+    depends_on:
+      - config
     ports:
-    - 8761:8761
+      - "8761:8761"
 
   gateway:
-    image: usefulmana/api-gateway
+    build: ./api-gateway
     restart: always
+    depends_on:
+      - config
     ports:
-    - 8080:8080
-    links:
-      - gateway-postgres
+      - "8080:8080"
 
-  gateway-postgres:
-    image: postgres
-    restart: always
-    ports:
-    - 5433:5432
 

@@ -1,107 +1,60 @@
 package edu.rmit.gateway.security;
 
-import edu.rmit.gateway.model.JwtToken;
-import edu.rmit.gateway.model.MyUserDetails;
-import edu.rmit.gateway.repo.JwtTokenRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import edu.rmit.gateway.config.AppProperties;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 
-@Component
+@Service
 public class JwtTokenProvider {
-    private static final String AUTH="auth";
-    private static final String AUTHORIZATION="Authorization";
-    private String secretKey="secret-key";
-    private long validityInMilliseconds = 3600000; // 1h
 
-    @Autowired
-    private JwtTokenRepository jwtTokenRepository;
+    private AppProperties appProperties;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    public JwtTokenProvider(AppProperties appProperties) {
+        this.appProperties = appProperties;
     }
 
-    public String createToken(String username, List<String> roles) {
-
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put(AUTH,roles);
+    public String createToken(Authentication authentication) {
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+        Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
-        String token =  Jwts.builder()//
-                .setClaims(claims)//
-                .setIssuedAt(now)//
-                .setExpiration(validity)//
-                .signWith(SignatureAlgorithm.HS256, secretKey)//
+        return Jwts.builder()
+                .setSubject(userPrincipal.getId())
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
                 .compact();
-        jwtTokenRepository.save(new JwtToken(token));
-        return token;
     }
 
-    public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader(AUTHORIZATION);
-        /*if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
-        }*/
-        if (bearerToken != null ) {
-            return bearerToken;
+    public Long getUserIdFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(appProperties.getAuth().getTokenSecret())
+                .parseClaimsJws(token)
+                .getBody();
+
+        return Long.parseLong(claims.getSubject());
+    }
+
+    public boolean validateToken(String authToken) {
+        try {
+            Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
+            return true;
+        } catch (SignatureException ex) {
+            System.out.println("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            System.out.println("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            System.out.println("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            System.out.println("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("JWT claims string is empty.");
         }
-        return null;
-    }
-
-    public boolean validateToken(String token) throws JwtException,IllegalArgumentException{
-        Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-        return true;
-    }
-
-    public boolean getToken(String token) throws JwtException,IllegalArgumentException{
-        System.out.println(Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token));
-        return true;
-    }
-
-    public boolean isTokenPresentInDB (String token) {
-        return jwtTokenRepository.findById(token).isPresent();
-    }
-    //user details with out database hit
-    public UserDetails getUserDetails(String token) {
-        String userName =  getUsername(token);
-        List<String> roleList = getRoleList(token);
-        UserDetails userDetails = new MyUserDetails(userName,roleList.toArray(new String[roleList.size()]));
-        return userDetails;
-    }
-    public List<String> getRoleList(String token) {
-        return (List<String>) Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).
-                getBody().get(AUTH);
-    }
-
-    public String getUsername(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
-    }
-    public Authentication getAuthentication(String token) {
-        //using data base: uncomment when you want to fetch data from data base
-        //UserDetails userDetails = userDetailsService.loadUserByUsername(getUsername(token));
-        //from token take user value. comment below line for changing it taking from data base
-        UserDetails userDetails = getUserDetails(token);
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return false;
     }
 
 }
-
