@@ -1,3 +1,5 @@
+
+
 server:
   port: 8080
 
@@ -12,6 +14,23 @@ hystrix:
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://pi:GAtech321@sept.pjbjd.mongodb.net/sept?retryWrites=true&w=majority
+      database: sept
+
+app:
+  auth:
+    tokenSecret: SOME_SECRET
+    tokenExpirationMsec: 864000000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
 
 zuul:
   ignoredServices: '*'

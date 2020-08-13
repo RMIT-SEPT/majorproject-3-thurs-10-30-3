@@ -1,68 +1,69 @@
 package edu.rmit.gateway.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-@Entity
-@Table(name = "users", schema = "myapp")
-@EntityListeners(AuditingEntityListener.class)
-@Data
+
+@Document(collection = "users")
+@Getter
+@Setter
+@AllArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Email(message = "Please enter a valid email address")
     @NotBlank
-    @Column(name = "email", unique = true)
+    @Indexed(unique = true)
     private String email;
 
     @NotBlank
-    @Column(name = "username", unique = true)
+    @Indexed(unique = true)
+    @Size(min = 4, max = 25, message = "Username must be between 4 and 25 characters long")
     private String username;
 
     @NotBlank
-    @Column(name = "name")
+    @Size(min = 2, max = 50, message = "Username must be between 2 and 50 characters long")
     private String name;
 
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "phone")
+    @Indexed(unique = true)
     private String phone;
 
-    @OneToMany
-    private Set<Role> roles;
+    private Role role;
 
-    @Column(name = "created_at")
+    private AuthProvider authProvider;
+
+    private String authProviderId;
+
+    private String imageUrl;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @LastModifiedDate
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
-    private boolean isActive = true;
-    private boolean isLocked = false;
-    private boolean isExpired = false;
-    private boolean isEnabled = true;
+    private boolean isVerified = false;
 
     public User() {
     }
