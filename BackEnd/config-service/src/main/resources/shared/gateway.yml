@@ -1,7 +1,7 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://registry:8761/eureka
 
 server:
   port: 8080
@@ -36,12 +36,10 @@ app:
     authorizedRedirectUris:
 
 zuul:
-  ignoredServices: '*'
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
   routes:
     admin-service:
       path: /admin/**
-      url: http://localhost:8081
-      stripPrefix: false
+      url: http://admin-service:8081/
