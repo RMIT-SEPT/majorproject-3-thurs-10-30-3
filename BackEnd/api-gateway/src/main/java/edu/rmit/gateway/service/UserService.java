@@ -1,15 +1,13 @@
 package edu.rmit.gateway.service;
 
-import edu.rmit.gateway.error.BadRequestException;
-import edu.rmit.gateway.error.NotFoundException;
-import edu.rmit.gateway.model.AuthProvider;
+import edu.rmit.common.errors.NotFoundException;
+import edu.rmit.common.model.AuthProvider;
 import edu.rmit.gateway.model.RegistrationRequest;
 import edu.rmit.gateway.model.Role;
 import edu.rmit.gateway.model.User;
 import edu.rmit.gateway.repo.UserRepository;
 import edu.rmit.gateway.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -6,17 +6,17 @@ eureka:
 server:
   port: 8080
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000
+#
+#ribbon:
+#  ReadTimeout: 20000
+#  ConnectTimeout: 20000
 
 spring:
   data:
@@ -36,10 +36,10 @@ app:
     authorizedRedirectUris:
 
 zuul:
-  ignoredServices: '*'
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
-#  routes:
-#    path: /test/**
-#    url: http://localhost:8081/
+  routes:
+    admin-service:
+      path: /admin/**
+      url: http://admin-service:8081/

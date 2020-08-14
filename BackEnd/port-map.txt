@@ -1,4 +1,4 @@
 config-service= 8888
 service-registry= 8761
 api-gateway= 8080
-test-service= 8081
+admin-service= 8081
