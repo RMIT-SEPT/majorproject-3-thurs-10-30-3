@@ -1,13 +1,13 @@
 version: '3'
 services:
   config:
-    image: usefulmana/config-service
+    build: ./config-service
     restart: always
     ports:
       - "8888:8888"
 
   registry:
-    image: usefulmana/service-registry
+    build: ./service-registry
     restart: always
     depends_on:
       - config
@@ -15,7 +15,7 @@ services:
       - "8761:8761"
 
   gateway:
-    image: usefulmana/api-gateway
+    build: ./api-gateway
     restart: always
     depends_on:
       - config
@@ -24,7 +24,7 @@ services:
       - "8080:8080"
 
   admin-service:
-    image: usefulmana/admin-service
+    build: ./admin-service
     restart: always
     depends_on:
       - config

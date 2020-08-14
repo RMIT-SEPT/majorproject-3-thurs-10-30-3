@@ -1,4 +1,4 @@
-package edu.rmit.gateway.model;
+package edu.rmit.admin.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.rmit.common.model.AuthProvider;

@@ -1,7 +1,7 @@
 package edu.rmit.gateway.controller;
 
 
-import edu.rmit.gateway.error.BadRequestException;
+import edu.rmit.common.errors.BadRequestException;
 import edu.rmit.gateway.model.*;
 import edu.rmit.gateway.repo.UserRepository;
 import edu.rmit.gateway.service.UserService;

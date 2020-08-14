@@ -1,7 +1,7 @@
 package edu.rmit.gateway.security.oauth2;
 
 import edu.rmit.gateway.error.OAuth2AuthenticationProcessingException;
-import edu.rmit.gateway.model.AuthProvider;
+import edu.rmit.common.model.AuthProvider;
 import edu.rmit.gateway.model.Role;
 import edu.rmit.gateway.model.User;
 import edu.rmit.gateway.repo.UserRepository;

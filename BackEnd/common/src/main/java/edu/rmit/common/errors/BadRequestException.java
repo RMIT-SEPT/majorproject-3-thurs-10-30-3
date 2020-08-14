@@ -1,10 +1,6 @@
-package edu.rmit.gateway.error;
+package edu.rmit.common.errors;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {
         super(message);
