@@ -1,13 +1,12 @@
 package edu.rmit.gateway.controller;
 
-import edu.rmit.gateway.error.BadRequestException;
-import edu.rmit.gateway.error.NotFoundException;
+import edu.rmit.common.errors.BadRequestException;
+import edu.rmit.common.errors.NotFoundException;
 import edu.rmit.gateway.model.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import java.time.LocalDateTime;
 
