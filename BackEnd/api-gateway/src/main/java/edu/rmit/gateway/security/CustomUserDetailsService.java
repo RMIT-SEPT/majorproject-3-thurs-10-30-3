@@ -1,6 +1,7 @@
 package edu.rmit.gateway.security;
 
-import edu.rmit.gateway.error.CustomException;
+import edu.rmit.gateway.error.BadRequestException;
+import edu.rmit.gateway.error.NotFoundException;
 import edu.rmit.gateway.model.User;
 import edu.rmit.gateway.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(
-                () -> new CustomException("User not found", HttpStatus.BAD_REQUEST)
+                () -> new NotFoundException("User not found")
         );
 
         return UserPrincipal.create(user);

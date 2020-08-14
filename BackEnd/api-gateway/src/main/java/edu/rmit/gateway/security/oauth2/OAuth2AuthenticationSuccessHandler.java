@@ -1,7 +1,7 @@
 package edu.rmit.gateway.security.oauth2;
 
 import edu.rmit.gateway.config.AppProperties;
-import edu.rmit.gateway.error.CustomException;
+import edu.rmit.gateway.error.BadRequestException;
 import edu.rmit.gateway.security.JwtTokenProvider;
 import edu.rmit.gateway.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 .map(Cookie::getValue);
 
         if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
-            throw new CustomException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication", HttpStatus.BAD_REQUEST);
+            throw new BadRequestException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication");
         }
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());

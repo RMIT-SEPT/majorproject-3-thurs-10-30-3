@@ -1,6 +1,7 @@
 package edu.rmit.gateway.service;
 
-import edu.rmit.gateway.error.CustomException;
+import edu.rmit.gateway.error.BadRequestException;
+import edu.rmit.gateway.error.NotFoundException;
 import edu.rmit.gateway.model.AuthProvider;
 import edu.rmit.gateway.model.RegistrationRequest;
 import edu.rmit.gateway.model.Role;
@@ -38,7 +39,7 @@ public class UserService {
     public String authenticate(String username, String password){
         Optional<User> optionalUser = userRepository.findByUsername(username);
 
-        if (!optionalUser.isPresent()) throw new CustomException("Username does not exist!", HttpStatus.BAD_REQUEST);
+        if (!optionalUser.isPresent()) throw new NotFoundException("Username does not exist!");
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
@@ -50,7 +51,7 @@ public class UserService {
     }
 
     @Transactional
-    public User saveUser(RegistrationRequest registrationRequest){
+    public void saveUser(RegistrationRequest registrationRequest){
 
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
@@ -62,6 +63,6 @@ public class UserService {
         user.setRole(Role.CUSTOMER);
         user.setAuthProvider(AuthProvider.LOCAL);
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }
