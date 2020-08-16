@@ -7,10 +7,10 @@
 
 #root .signup-container{
     transition: 0.5s all ease-in-out;
-
-    height:80vh;
-    width:30vw;
-    margin-right:10vw;
+    
+    height:87vh;
+    width:40vw;
+    // margin-right:10vw;
     z-index:1;
     overflow-y:auto;
     position: relative;
@@ -27,20 +27,25 @@
         padding:3rem;
         background-repeat: no-repeat; 
         background-position: bottom;
+        font-size:1.3rem;
+
+        input{
+            color:rgb(243, 233, 233);
+            font-size:1.3rem;
+        }
 
         .header{
             height:34%;
             text-align: center;
         }
 
-        #root .body {
-            height:75%;
-            // font-size:1.2rem;
-        }
+        // #root .body {
+        //     height:75%;
+        // }
 
         .user-icon{
-            width:30%;
-            height:30%;
+            width:20%;
+            height:20%;
         }
 
         .signup-button{
@@ -77,29 +82,5 @@
 }
 
 #root .sign-up-slide-right{
-    transform:translateX(150%)
+    transform:translateX(300%)
 }
-
-// .sign-up-slide-left{
-//     animation: slide-left 0.5s;
-// }
-
-// .sign-up-slide-right{
-//     0%{
-//     }
-
-//     100%{
-//         trnasform: translateX(-100%);
-//         display:block
-//     }
-// }
-
-// @keyframes slide-left{
-//     0%{
-//     }
-
-//     100%{
-//         trnasform: translateX(-100%);
-//         display:block
-//     }
-// }

@@ -1,6 +1,5 @@
 import { BASE_URL } from "../config";
-const API = BASE_URL + '/api'
-
+const API = BASE_URL 
 export const getUsers = ({ token }) => {
     return fetch(`${API}/users`, {
         method: "GET",
@@ -18,10 +17,10 @@ export const getUsers = ({ token }) => {
         });
 };
 
-export const signup = user => {
+export const register = user => {
     console.log("what is user : ", user)
 
-    return fetch(`${API}/signup`, {
+    return fetch(`${API}/auth/register`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -38,7 +37,7 @@ export const signup = user => {
 };
 
 export const signin = user => {
-    return fetch(`${API}/signin`, {
+    return fetch(`${API}/auth/login`, {
         method: "POST",
         headers: {
             Accept: "application/json",
