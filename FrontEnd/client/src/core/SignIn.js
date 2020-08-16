@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import './Main.scss'
 import { signin, authenticate } from '../API/userAPI'
 import Loader from './Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import './SignIn.scss'
+import queryString from 'query-string';
 
-const SignIn = ({ history, visible, flipVisibility }) => {
+const SignIn = ({ history, visible, flipVisibility, location }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
     if (jwt && jwt.token) {
-        history.push('/dashboard/locations')
+        history.push('/')
     }
 
     const [values, setValues] = useState({
-        email: "",
+        username: "",
         password: "",
         error: "",
         loading: false,
     })
-    const { email, password, loading, error } = values;
+
+    var query = queryString.parse(window.location.search)
+    const [bookingModalOpened, setBookingModalOpened] = useState(query.bookingModalOpened ? true : false)
+    const { username, password, loading, error } = values;
 
     useEffect(() => {
 
@@ -30,17 +33,21 @@ const SignIn = ({ history, visible, flipVisibility }) => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        signin({ email, password }).then(
+        // e.preventDefault()
+        signin({ username, password }).then(
             data => {
                 console.log("data : ", data)
                 if (data.error) {
                     setValues({ ...values, error: data.error })
                 }
                 else {
-                    authenticate(data, () => {
-                        history.push('/dashboard/locations')
-                    });
+                    localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
+
+                    if (bookingModalOpened) {
+                        history.push('/?bookingModalOpened=true')
+                    } else {
+                        history.push('/')
+                    }
                 }
             })
     }
@@ -50,25 +57,22 @@ const SignIn = ({ history, visible, flipVisibility }) => {
     }
 
 
-    const ValidateEmail = (mail) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-            return (true)
-        }
-        return (false)
-    }
+    // const ValidateEmail = (mail) => {
+    //     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    //         return (true)
+    //     }
+    //     return (false)
+    // }
 
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
-            if (ValidateEmail(email)) {
-                handleSubmit(e)
-            } else {
-                setValues({ ...values, error: true })
-            }
+            // setValues({ ...values, error: true })
+            handleSubmit()
         }
     }
 
     const isFilled = () => {
-        if (email !== '') {
+        if (username !== '') {
             return 'label label-active'
         } else {
             return 'label'
@@ -87,8 +91,8 @@ const SignIn = ({ history, visible, flipVisibility }) => {
                 <div class="signin-body">
 
                     <div class="md-form ">
-                        <input type="email" id="Form-email1" class="form-control " onChange={handleChange('email')} />
-                        <label data-error="wrong" className={isFilled()} for="Form-email1">Your email</label>
+                        <input type="email" id="Form-email1" class="form-control " onChange={handleChange('username')} />
+                        <label data-error="wrong" className={isFilled()} for="Form-email1">Your username</label>
                     </div>
 
                     <div class="md-form ">

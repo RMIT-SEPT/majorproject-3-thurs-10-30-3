@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import './Main.scss'
+import './Authentication.scss'
 import { signin, authenticate } from '../API/userAPI'
 import Loader from './Loader'
 import Parallax from 'parallax-js' // Now published on NPM
@@ -12,7 +12,7 @@ import SignUp from "./SignUp";
 const Main = ({ history }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
     if (jwt && jwt.token) {
-        history.push('/dashboard/locations')
+        history.push('/')
     }
 
     const [values, setValues] = useState({
@@ -56,9 +56,9 @@ const Main = ({ history }) => {
     }
 
     return (
-        <div className={`main-cont ${visible === 1 && 'main-cont-enlarged'} row align-items-center justify-content-end`}>
-            <SignIn visible={visible} flipVisibility={flipVisibility} />
-            <SignUp visible={visible} flipVisibility={flipVisibility} />
+        <div className={`main-cont ${visible === 1 && 'main-cont-enlarged'} row align-items-center justify-content-center`}>
+            <SignIn visible={visible} flipVisibility={flipVisibility} history={history}/>
+            <SignUp visible={visible} flipVisibility={flipVisibility} history={history}/>
 
             {/* <ul id="scene">
                 <li class="layer polygons" data-depth="0.15"><img src="img/main/polygons.png" alt="image" /></li>

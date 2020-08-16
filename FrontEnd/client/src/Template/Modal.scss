@@ -16,5 +16,13 @@
         position: relative;
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07), 0 6px 5px 0 rgba(0, 0, 0, 0.07);
         /* padding:2rem; */
+        overflow:auto
+    }
+
+    .close-btn{
+        position: absolute;
+        top:1vh;
+        right:1vw;
+        z-index: 2;
     }
   }
