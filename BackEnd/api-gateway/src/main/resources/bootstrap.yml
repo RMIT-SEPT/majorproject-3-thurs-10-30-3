@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: gateway
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 997079004254-jfkhffpu96tp80eqe34kc6s2abtilqbe.apps.googleusercontent.com
+            clientSecret: iF9wC25c_q7ArpfOe0RATm0k
+            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 946210579080024
+            clientSecret: 0701b82ad1fa1cb2ff461083b1ea19ad
+            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - public_profile
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+      password: 123456
+      username: user

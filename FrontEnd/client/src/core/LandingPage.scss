@@ -1,0 +1,216 @@
+.showError {
+  color: red;
+  font-weight: 700;
+}
+
+#root .main-cont {
+  width: 100vw;
+  height: 100vh;
+  // background-color:rgb(225, 225, 245) ;
+  // background-image: url("../img/background.jpg");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
+}
+
+#root .signin-body label {
+  // font-size:1.4rem;
+}
+
+#scene {
+  position: absolute;
+  bottom: 14vh;
+  left: 5vw;
+  width: 80vw;
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Main component
+
+#root .main-cont {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    -45deg,
+    #bd0db4,
+    #0d4363,
+    rgb(214, 40, 58),
+    rgba(226, 135, 119, 0.7)
+  );
+  background-size: 300% 100%;
+  background-position: 0% 0%;
+  overflow: hidden;
+  // background-size: 100% 100%;
+  position: relative;
+  transition: 0.7s all ease-in-out;
+  // animation: enlarge 0.8s ease-in-out;
+  // background-position:30% 30%;
+  // effect
+}
+
+#root .main-cont-enlarged {
+  background-position: 100% 100%;
+}
+
+@keyframes enlarge {
+  0% {
+    clip-path: circle(10% at 0% 0%);
+    background-position: 100% 100%;
+  }
+  100% {
+    clip-path: circle(100%);
+    // background-position:0% 30%;
+  }
+}
+
+@keyframes backgroundEffect {
+  0% {
+    background-position: 0 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 0%;
+  }
+}
+
+/* Mitchell's Nonreviewed CSS */
+html,
+body {
+  font-family: Arial;
+  font-size: 17px;
+  margin: 0px;
+  padding: 0px;
+  color: #4f4f4f;
+  background-color: #ffffff;
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex: 1 1 0%;
+  height: 10vh;
+  flex-flow: row nowrap;
+
+  #company_header {
+    align-items: center;
+    display: flex;
+    justify-content: left;
+    height: 100%;
+    flex-grow: 0.98;
+    padding-left: 10px;
+  }
+
+  #user_header {
+    align-items: center;
+    display: flex;
+    justify-content: right;
+    height: 100%;
+    flex-grow: 0.02;
+  }
+}
+
+/* Content */
+.main_container {
+  display: flex;
+  flex: 1 1 0%;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+
+  /* Side Bar */
+  #side_bar {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    flex-grow: 0.15;
+    height: 90vh;
+
+    .sidebar_links {
+      display: flex;
+      flex: 1 1 0%;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      align-content: center;
+    }
+    .pagelink {
+      background-color: #f2f2f2;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex-grow: 0;
+      flex-shrink: 1;
+    }
+    .active {
+      background-color: #40a671;
+      color: #ffffff;
+    }
+  }
+
+  /* Main Page Container */
+  .page_container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #eeedf5;
+    height: 90vh;
+    flex-grow: 0.85;
+    flex-flow: column nowrap;
+
+    #button_book {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      background-color: #40a671;
+      max-height: 20%;
+      border-radius: 20px;
+      padding: 20px;
+      color: #ffffff;
+    }
+
+    #new_booking {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      height: 90vh;
+      width: 70%;
+      flex-grow: 0.85;
+      flex-flow: column nowrap;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pagelink,
+  .page_container,
+  #new_booking {
+    width: 100vw;
+    margin: 0px;
+  }
+
+  .main_container {
+    flex-flow: column nowrap;
+  }
+  .pagelink {
+    height: 7vh;
+    width: 100%;
+  }
+  #side_bar {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -4,4 +4,8 @@ creds2.sh
 terraform.tfstate
 terraform.tfstate.backup
 tmp/
-
+.idea/
+*.jar
+target/
+.env
+*.iml
