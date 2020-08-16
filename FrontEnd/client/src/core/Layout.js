@@ -19,9 +19,9 @@ const Layout = ({ children }) => {
 
     return (
         <div >
-            <div className="nav-bar">
+            {/* <div className="nav-bar">
                 navbar
-            </div>
+            </div> */}
             {children}
         </div>
     )
