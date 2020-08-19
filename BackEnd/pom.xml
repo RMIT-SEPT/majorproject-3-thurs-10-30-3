@@ -29,6 +29,8 @@
         <module>config-service</module>
         <module>admin-service</module>
         <module>common</module>
+        <module>business-service</module>
+        <module>appointment-service</module>
     </modules>
 
     <dependencyManagement>

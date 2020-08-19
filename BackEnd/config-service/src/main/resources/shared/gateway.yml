@@ -43,3 +43,9 @@ zuul:
     admin-service:
       path: /admin/**
       url: http://admin-service:8081/
+    business-service:
+      path: /bus/**
+      url: http://business-service:8082/
+    appointment-service:
+      path: /app/**
+      url: http://appointment-service:8083/
