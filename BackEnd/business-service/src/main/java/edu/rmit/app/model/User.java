@@ -1,4 +1,4 @@
-package edu.rmit.admin.model;
+package edu.rmit.app.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.rmit.common.model.AuthProvider;
@@ -10,11 +10,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-
 
 @Document(collection = "users")
 @Getter
@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
     @Email(message = "Please enter a valid email address")
