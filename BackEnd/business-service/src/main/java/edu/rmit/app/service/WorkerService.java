@@ -51,10 +51,15 @@ public class WorkerService {
         user.setRole(Role.WORKER);
         user.setAuthProvider(AuthProvider.LOCAL);
 
-        userRepository.save(user);
+        User newUser = userRepository.save(user);
 
         Business business = optional.get();
-        business.getWorkers().add(user);
+        business.getWorkers().add(newUser);
+
+        for (User u :
+                business.getWorkers()) {
+            System.out.println(u.getId());
+        }
         businessRepository.save(business);
 
         Map<String, String> res = new HashMap<>();

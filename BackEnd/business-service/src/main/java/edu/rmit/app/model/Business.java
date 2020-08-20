@@ -8,9 +8,11 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "businesses")
@@ -23,15 +25,14 @@ public class Business {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
-    private String owner;
-
     private String name;
 
     private String address;
 
     private String description;
 
-    private List<User> workers;
+    @DBRef
+    private List<User> workers = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreatedDate
