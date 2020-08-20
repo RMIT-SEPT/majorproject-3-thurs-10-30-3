@@ -31,7 +31,7 @@ public class Business {
 
     private String description;
 
-    private List<User> employees;
+    private List<User> workers;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @CreatedDate

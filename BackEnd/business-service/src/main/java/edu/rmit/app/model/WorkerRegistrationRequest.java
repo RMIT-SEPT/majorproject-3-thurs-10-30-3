@@ -18,6 +18,9 @@ public class WorkerRegistrationRequest {
     @NotBlank
     private String name;
 
+    @NotBlank
+    private String businessId;
+
     private String address;
 
     private String phone;

@@ -2,7 +2,9 @@ package edu.rmit.app.service;
 
 
 import edu.rmit.app.model.*;
+import edu.rmit.app.repo.BusinessRepository;
 import edu.rmit.app.repo.UserRepository;
+import edu.rmit.common.errors.NotFoundException;
 import edu.rmit.common.model.AuthProvider;
 import edu.rmit.common.utils.UsernameGeneratorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class WorkerService {
@@ -20,11 +23,20 @@ public class WorkerService {
     UserRepository userRepository;
 
     @Autowired
+    BusinessRepository businessRepository;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Transactional
     public Map<String, String> saveEmployee(WorkerRegistrationRequest request){
         User user = new User();
+
+        Optional<Business> optional = businessRepository.findById(request.getBusinessId());
+
+        if (!optional.isPresent()) {
+            throw new NotFoundException("Business Not Found");
+        }
 
         String username = UsernameGeneratorUtil.generateUsername("w");
         String password = String.valueOf(UsernameGeneratorUtil.generateRandomNumbers());
@@ -40,6 +52,10 @@ public class WorkerService {
         user.setAuthProvider(AuthProvider.LOCAL);
 
         userRepository.save(user);
+
+        Business business = optional.get();
+        business.getWorkers().add(user);
+        businessRepository.save(business);
 
         Map<String, String> res = new HashMap<>();
 
