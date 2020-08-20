@@ -24,4 +24,16 @@ public class BusinessService {
 
         return businessRepository.save(business);
     }
+
+    @Transactional
+    public Business saveEmployee(BusinessRegistrationRequest request){
+
+        Business business = new Business();
+        business.setAddress(request.getAddress());
+        business.setDescription(request.getDescription());
+        business.setName(request.getName());
+        business.setOwner(request.getOwner());
+
+        return businessRepository.save(business);
+    }
 }
