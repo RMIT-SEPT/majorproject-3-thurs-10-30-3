@@ -2,3 +2,5 @@ config-service= 8888
 service-registry= 8761
 api-gateway= 8080
 admin-service= 8081
+business-service = 8082
+appointment-service = 8083

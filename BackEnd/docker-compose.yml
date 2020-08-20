@@ -32,4 +32,13 @@ services:
     ports:
       - "8081:8081"
 
+  business-service:
+    image: usefulmana/business-service
+    restart: always
+    depends_on:
+      - config
+      - registry
+    ports:
+      - "8082:8082"
+
 
