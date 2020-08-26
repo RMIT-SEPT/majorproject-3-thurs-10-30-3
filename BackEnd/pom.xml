@@ -29,6 +29,7 @@
         <module>config-service</module>
         <module>admin-service</module>
         <module>common</module>
+        <module>Testing</module>
     </modules>
 
     <dependencyManagement>
