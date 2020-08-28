@@ -19,15 +19,9 @@ const Layout = ({ children }) => {
 
     return (
         <div >
-<<<<<<< HEAD
-            <div className="nav-bar">
-                navbar | profile | home 
-            </div>
-=======
             {/* <div className="nav-bar">
                 navbar
             </div> */}
->>>>>>> 1517c1ab232402784c43c0c821080dd53716e8d4
             {children}
         </div>
     )
