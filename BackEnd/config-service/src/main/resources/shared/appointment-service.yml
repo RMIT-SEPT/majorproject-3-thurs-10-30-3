@@ -1,0 +1,13 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka
+
+server:
+  port: 8083
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://pi:GAtech321@sept.pjbjd.mongodb.net/sept?retryWrites=true&w=majority
+      database: sept
