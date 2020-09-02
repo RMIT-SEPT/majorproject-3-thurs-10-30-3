@@ -1,0 +1,67 @@
+
+/* =======================================
+Apply different size based on screen size
+========================================*/
+iframe{
+    width: 500px;
+    height:400px;
+}
+
+
+@media screen and (min-width: 1280px) {
+    html{
+        font-size:13px 
+    }
+    
+}
+
+@media screen and (min-width: 1400px) {
+    html{
+        font-size:15px 
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    html{
+        font-size:17px 
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    html{
+        font-size:19px 
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    html{
+        font-size:21px 
+    }
+}
+
+@media screen and (min-width: 2560px) {
+    // body{
+    //     font-size:23px 
+    // }
+
+    html{
+        font-size:23px 
+    }
+}
+
+@media screen and (min-width: 3840px) {
+    // body{
+    //     font-size:23px 
+    // }
+
+    html{
+        font-size:35px 
+    }
+}
+
+
+
+
+
+
+

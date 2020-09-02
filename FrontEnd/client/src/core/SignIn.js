@@ -19,6 +19,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
         error: "",
         loading: false,
     })
+
     var query = queryString.parse(window.location.search)
     const [bookingModalOpened, setBookingModalOpened] = useState(query.bookingModalOpened ? true : false)
     const { username, password, loading, error } = values;
