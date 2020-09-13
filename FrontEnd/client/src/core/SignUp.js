@@ -113,7 +113,7 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
 
     const showForm = () => {
         return (
-            <form onKeyDown={handleEnter} className={`signup-form`} >
+            <form onKeyDown={handleEnter} data-testid="signup-form" className={`signup-form`} >
                 <div class="header">
                     <div class="row justify-content-center mr-3">
                         <img src="img/user.png" className="user-icon" />
@@ -123,16 +123,16 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
                 <div class="body row">
                     <div className="col-6">
                         <div class="md-form ">
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('username')} />
+                            <input type="text" id="Form-pass1" name="username" class="form-control " onChange={handleChange('username')} />
                             <label className={isFilled("username")} data-error="wrong" for="Form-pass1">Your username</label>
                         </div>
                         <div class="md-form ">
-                            <input type="email" id="Form-email1" class="form-control " onChange={handleChange('email')} />
+                            <input type="email" id="Form-email1" name="email" class="form-control " onChange={handleChange('email')} />
                             <label data-error="wrong" className={isFilled("email")} for="Form-email1">Your email</label>
                         </div>
 
                         <div class="md-form ">
-                            <input type="password" id="Form-pass1" class="form-control " onChange={handleChange('password')} />
+                            <input type="password" id="Form-pass1" name="password" class="form-control " onChange={handleChange('password')} />
                             <label className={isFilled("password")} data-error="wrong" for="Form-pass1">Your password</label>
                         </div>
                     </div>
@@ -167,7 +167,7 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
     }
 
     return (
-        <div className={`signup-container ${visible === 1 ? 'sign-up-slide-left' : "sign-up-slide-right"}`}>
+        <div data-testid="signup-container" className={`signup-container ${visible === 1 ? 'sign-up-slide-left' : "sign-up-slide-right"}`}>
             {showForm()}
         </div>
     )
