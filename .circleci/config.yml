@@ -14,12 +14,10 @@ jobs:
   frontend-build-test:
     executor:
       name: node/default
-      tag: '10.4'
+      tag: '13'
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
+      - node/install-packages
       - run: npm run test
 
 workflows:
