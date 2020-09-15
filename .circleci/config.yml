@@ -2,14 +2,31 @@ version: 2.1
 
 orbs:
   maven: circleci/maven@1.0.2
-  
+  node: circleci/node@4.0.0
+  heroku: circleci/heroku@1.2.2
+  aws-ecs: circleci/aws-ecs@1.3.0
+
 jobs:
-  setup-backend-testing:
+  backend-build-test:
+    docker:
+      - image: circleci/openjdk:11.0.1-jdk
     steps:
-      - run: cd BackEnd
+      - checkout
+      - run: cd backend
+      - mvn clean install
+  frontend-build-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: cd backend
+      - node/with-cache:
+        steps:
+          - run: npm install
+      - run: npm run test
 
 workflows:
   automated-testing:
     jobs:
-      - setup-backend-testing
-      - maven/test
+      - backend-build
+      - frontend-build-test
