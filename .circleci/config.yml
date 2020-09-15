@@ -3,13 +3,8 @@ version: 2.1
 orbs:
   maven: circleci/maven@1.0.2
 
-commands:
-  go-to-backend:
-    steps:
-      - run: cd Backend
-
 workflows:
   automated-testing:
     jobs:
-      - go-to-backend
+      - run: cd BackEnd
       - maven/test
