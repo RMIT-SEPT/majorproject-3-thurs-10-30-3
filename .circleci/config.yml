@@ -10,16 +10,21 @@ jobs:
   backend-build-test:
     docker:
       - image: circleci/openjdk:11.0.1-jdk
+ 
+    working_directory: ~/FrontEnd
+    
     steps:
       - checkout
-      - run: cd backend
       - mvn clean install
+      
   frontend-build-test:
     executor:
       name: node/default
+    
+    working_directory: ~/BackEnd
+    
     steps:
       - checkout
-      - run: cd backend
       - node/with-cache:
         steps:
           - run: npm install
