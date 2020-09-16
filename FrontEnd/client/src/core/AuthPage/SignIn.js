@@ -72,11 +72,9 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
         }
     }
 
-    const isFilled = () => {
-        if (username !== '') {
-            return 'label label-active'
-        } else {
-            return 'label'
+    const isFilled = (formInput) => {
+        if (formInput !== '') {
+            return 'Cannot be left Blank'
         }
     }
 
@@ -88,18 +86,30 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                     <div className="signin-element column">
                         <img src="img/user.png" className="user-icon" />
                     </div>
-                    <div className="signin-label column">Sign In</div>
+                    <div className="signin-label-main column">Sign In</div>
                 </div>
 
                 <div className="signin-body">
 
                     <div className="signin-element">
+
+                        {/* Label Only Used to Show Errors */}
+                        <div className="signin-label">
+                            <label data-error="wrong" for="Form-email1" value={isFilled(username)}></label>
+                        </div>
+
                         <div>
                             <input type="email" name="username" id="Form-email1" className="form-control " onChange={handleChange('username')} placeholder="Username / Email" />
                         </div>
                     </div>
 
                     <div className="signin-element">
+
+                        {/* Label Only Used to Show Errors */}
+                        <div className="signin-label">
+                            <label className={isFilled(password)} data-error="wrong" for="Form-pass1"></label>
+                        </div>
+
                         <div>
                             <input type="password" name="password" id="Form-pass1" className="form-control " onChange={handleChange('password')} placeholder="Password" />
                         </div>
@@ -114,7 +124,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
 
 
                     <div className="text-center">
-                        <p>Have not had account yet?</p>
+                        <p>Don't have an Account?</p>
                     </div>
 
                     <div className="text-center sign-up-link" onClick={flipVisibility}>
