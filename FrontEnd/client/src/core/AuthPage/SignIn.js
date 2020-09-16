@@ -72,9 +72,12 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
         }
     }
 
-    const isFilled = (formInput) => {
-        if (formInput !== '') {
-            return 'Cannot be left Blank'
+    const isFilled = (field) => {
+        if (values[field] !== "") {
+            return "Cannot be left Blank"
+        }
+        else {
+            return "";
         }
     }
 
