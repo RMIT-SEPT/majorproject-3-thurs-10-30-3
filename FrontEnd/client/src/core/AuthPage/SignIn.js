@@ -74,10 +74,10 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
 
     const isFilled = (field) => {
         if (values[field] !== "") {
-            return "Cannot be left Blank"
-        }
-        else {
-            return "";
+            // Set Border of Input to Red
+            return 'form-control active'
+        } else {
+            return 'form-control'
         }
     }
 
@@ -97,24 +97,24 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                     <div className="signin-element">
 
                         {/* Label Only Used to Show Errors */}
-                        <div className="signin-label">
+                        {/* <div className="signin-label">
                             <label data-error="wrong" for="Form-email1" value={isFilled(username)}></label>
-                        </div>
+                        </div> */}
 
                         <div>
-                            <input type="email" name="username" id="Form-email1" className="form-control " onChange={handleChange('username')} placeholder="Username / Email" />
+                            <input type="email" name="username" id="Form-email1" className={isFilled("username")} onChange={handleChange('username')} placeholder="Username / Email" />
                         </div>
                     </div>
 
                     <div className="signin-element">
 
                         {/* Label Only Used to Show Errors */}
-                        <div className="signin-label">
+                        {/* <div className="signin-label">
                             <label className={isFilled(password)} data-error="wrong" for="Form-pass1"></label>
-                        </div>
+                        </div> */}
 
                         <div>
-                            <input type="password" name="password" id="Form-pass1" className="form-control " onChange={handleChange('password')} placeholder="Password" />
+                            <input type="password" name="password" id="Form-pass1" className={isFilled("password")} onChange={handleChange('password')} placeholder="Password" />
                         </div>
                     </div>
 
