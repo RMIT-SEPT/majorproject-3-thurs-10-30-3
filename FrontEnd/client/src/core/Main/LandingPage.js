@@ -85,6 +85,11 @@ const LandingPage = ({ history, location }) => {
     setKeyword(e.target.value)
   }
 
+  const handleEnter = (e) => {
+    if(e.key == "Enter")
+      handleClick()
+  }
+
   const handleClick = () => {
     var array = businessExamples.filter((c) => {
 
@@ -115,7 +120,7 @@ const LandingPage = ({ history, location }) => {
             <div> <b>Use the Search Bar Below to filter through the best in the business.</b> </div>
           </div>
           <div className="row">
-            <input className="search-bar" value={keyword} onChange={handleChange} />
+            <input className="search-bar" value={keyword} onChange={handleChange} onKeyDown={handleEnter}/>
             <div className="btn search-btn" onClick={handleClick}>Search</div>
           </div>
           <div className="result-cont">
