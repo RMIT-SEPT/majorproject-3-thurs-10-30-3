@@ -1,0 +1,76 @@
+.landing-page-cont {
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    > .first {
+        width: 50%;
+        background-color: orange;
+        padding: 5vw;
+        padding-top: 13vw;
+        color: white;
+
+        .heading {
+            font-size: 4vw;
+            font-weight: 700;
+            margin-bottom: 2vw;
+        }
+
+        .description {
+            // font-weight: 700;
+            line-height: 1.7;
+            margin-bottom: 3vw;
+        }
+
+        .search-bar {
+            color: black;
+            outline: none;
+            border: 0px;
+            font-size: inherit;
+            padding: 0.4vw;
+            padding-left: 1.5vw;
+            width: 85%;
+            border-top-left-radius: 0.3vw;
+            border-bottom-left-radius: 0.3vw;
+        }
+
+        .search-btn {
+            padding: 0.9vw;
+            background-color: rgb(107, 107, 223);
+            border-top-right-radius: 0.3vw;
+            border-bottom-right-radius: 0.3vw;
+
+            color: white;
+        }
+
+        .result-cont {
+            cursor: pointer;
+            background-color: rgb(245, 241, 241);
+            border-bottom-left-radius: 0.3vw;
+            border-bottom-right-radius: 0.3vw;
+            color: black;
+
+            .each-business {
+                padding: 0.5vw;
+
+                &:hover {
+                    background-color: rgb(211, 207, 207);
+                }
+            }
+        }
+    }
+
+    > .second {
+        width: 50%;
+
+        .first-img {
+            width: 20%;
+            transform: translate(30%, 40%);
+            position: absolute;
+        }
+
+        .second-img {
+            width: 60%;
+            transform: translate(50%, 100%);
+        }
+    }
+}

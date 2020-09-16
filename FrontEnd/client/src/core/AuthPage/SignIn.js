@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { signin, authenticate } from '../API/userAPI'
-import Loader from './Loader'
+import { signin, authenticate } from '../../API/userAPI'
+import Loader from '../Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import './SignIn.scss'
@@ -81,27 +81,27 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
 
     const showForm = () => {
         return (
-            <form onKeyDown={handleEnter} className={`signin-form `}>
-                <div class="signin-header">
-                    <div class="row justify-content-center mr-3">
+            <form onKeyDown={handleEnter} data-testid="signin-form" className={`signin-form `}>
+                <div className="signin-header">
+                    <div className="row justify-content-center mr-3">
                         <img src="img/user.png" className="user-icon" />
                     </div>
-                    <h3 class="" id="" ><strong>Sign in</strong></h3>
+                    <h3 className="" id="" ><strong>Sign in</strong></h3>
                 </div>
-                <div class="signin-body">
+                <div className="signin-body">
 
-                    <div class="md-form ">
-                        <input type="email" id="Form-email1" class="form-control " onChange={handleChange('username')} />
+                    <div className="md-form ">
+                        <input type="email" name="username" id="Form-email1" className="form-control " onChange={handleChange('username')} />
                         <label data-error="wrong" className={isFilled()} for="Form-email1">Your username</label>
                     </div>
 
-                    <div class="md-form ">
-                        <input type="password" id="Form-pass1" class="form-control " onChange={handleChange('password')} />
+                    <div className="md-form ">
+                        <input type="password" name="password" id="Form-pass1" className="form-control " onChange={handleChange('password')} />
                         <label className={isFilled()} data-error="wrong" for="Form-pass1">Your password</label>
                     </div>
                     {error && (<div className="position-absolute showError ">{error}</div>)}
-                    <div class="row justify-content-center mr-3 mt-5">
-                        <button type="button" class="signin-button" onClick={handleSubmit}>Sign in</button>
+                    <div className="row justify-content-center mr-3 mt-5">
+                        <button type="button" className="signin-button" onClick={handleSubmit}>Sign in</button>
                     </div>
                     <div className="text-center my-4">
                         Have not had account yet?
@@ -115,7 +115,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
     }
 
     return (
-        <div className={`signin-container ${visible === 0 ? 'sign-in-slide-down' : "sign-in-slide-up"}`}>
+        <div data-testid="signin-container" className={`signin-container ${visible === 0 ? 'sign-in-slide-down' : "sign-in-slide-up"}`}>
             {showForm()}
         </div>
     )
