@@ -1,11 +1,13 @@
 
 
 #root .signin-container{
-    width:40vw;
-    z-index:1;
+    width: 40vw;
+    // height: 70vh;
+    // z-index:1;
     transition: 0.5s all ease-in-out;
     font-size: 1rem;
     position: fixed;
+
 
     .signin-form{
         background-color: rgb(255, 255, 255);
@@ -13,7 +15,7 @@
         height:100%;
         width:100%;
         color:rgb(0, 0, 0);
-        padding:3rem;
+        // padding:3rem;
 
         .signin-element {
             text-align: center;
@@ -21,15 +23,29 @@
 
             input {
                 width: 100%;
-                padding: 1vh;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
                 font-size: 1.4rem;
+                color: rgb(0, 0, 0);
+
+                .active {
+                    border-color: red;
+                }
             }
 
-            >.signin-label {
+            .signin-label {
                 font-size: 1.2rem;
                 text-align: left;
                 color: red;
             }
+
+
+
+        }
+
+        .signin-body{
+            padding:3rem;
+
         }
 
 
@@ -38,6 +54,8 @@
             height:34%;
             text-align: center;
             padding-bottom: 2rem;
+            padding:3rem;
+
 
             .signin-label-main{
                 font-size: 2rem; 
@@ -61,7 +79,8 @@
             .signin-button{
                 // Making Button Like Credential Boxes
                 width: 100%;
-                padding: 1.4vh;
+                padding-top: 1.5vh;
+                padding-bottom: 1.5vh;
                 font-size: 1.4rem;
 
                 // Keep Below Credentials
