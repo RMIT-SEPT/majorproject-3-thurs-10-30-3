@@ -1,5 +1,6 @@
 
 .modal-background{
+    z-index: 10;
     position: fixed;
     top:0;
     left:0;
@@ -16,13 +17,9 @@
         position: relative;
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07), 0 6px 5px 0 rgba(0, 0, 0, 0.07);
         /* padding:2rem; */
-        overflow:auto
-    }
 
-    .close-btn{
-        position: absolute;
-        top:1vh;
-        right:1vw;
-        z-index: 2;
+        .modal-close-btn{
+            display: none;
+        }
     }
   }

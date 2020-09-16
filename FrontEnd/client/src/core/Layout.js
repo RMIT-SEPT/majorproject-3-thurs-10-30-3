@@ -12,17 +12,18 @@ const Layout = ({ children }) => {
     })
 
     useEffect(() => {
-       
+
     }, [])
 
 
 
     return (
-        <div >
-            {/* <div className="nav-bar">
-                navbar
-            </div> */}
-            {children}
+        <div className="layout-cont row JCB AIC">
+            <div className="row AIC first">
+                <div className="img-cont"><img src={require('./Main/img/logo.png')} /></div>
+                <div>Scheduler</div>
+            </div>
+            <div className="second">Sign in</div>
         </div>
     )
 }

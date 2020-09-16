@@ -2,8 +2,7 @@ import React, { useState, useEffect, useLocation, useHistory } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './SignIn.scss'
 import './SignUp.scss'
-import { authenticate, register, signin } from '../API/userAPI'
-import Loader from './Loader'
+import { authenticate, register, signin } from '../../API/userAPI'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import queryString from 'query-string';
@@ -11,7 +10,7 @@ import queryString from 'query-string';
 const SignUp = ({ history, visible, flipVisibility, location }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
     if (jwt && jwt.token) {
-        history.push('/dashboard/locations')
+        history.push('/')
     }
 
     const [values, setValues] = useState({

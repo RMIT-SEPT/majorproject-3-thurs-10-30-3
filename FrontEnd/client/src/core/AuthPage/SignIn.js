@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { signin, authenticate } from '../API/userAPI'
-import Loader from './Loader'
+import { signin, authenticate } from '../../API/userAPI'
+import Loader from '../Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import './SignIn.scss'

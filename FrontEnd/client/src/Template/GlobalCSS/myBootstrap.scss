@@ -1,0 +1,50 @@
+// My custome bootstarp
+$globalFontSize: 1.6vw;
+html {
+  font-size: $globalFontSize;
+}
+
+.row {
+  display: flex;
+}
+
+.row-w {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.JCC,
+.justify-content-center {
+  justify-content: center;
+}
+
+.JCB, .justify-content-between{
+  justify-content:space-between;
+}
+
+.JCE, .justify-content-end{
+  justify-content:flex-end;
+}
+
+.AIC,
+.align-items-center {
+  align-items: center;
+}
+
+
+
+.btn {
+  cursor: pointer;
+  // border-radius: 0.2vw;
+  text-align: center;
+  border:0px !important;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.text-center{
+  text-align: center;
+}

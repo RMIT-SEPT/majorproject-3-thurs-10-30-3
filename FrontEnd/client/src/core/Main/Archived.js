@@ -6,19 +6,15 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
-import "./LandingPage.scss";
-import { signin, authenticate } from "../API/userAPI";
-import Loader from "./Loader";
+import "./archived.scss";
 import Parallax from "parallax-js"; // Now published on NPM
 import anime from "animejs";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import Layout from "./Layout";
-import Booking from "./Booking";
-import Modal from "../Template/Modal";
+import Layout from "../Layout";
+import Booking from "../Booking";
+import Modal from "../../Template/Modal";
 import queryString from "query-string";
 
-const LandingPage = ({ history, location }) => {
+const Archived = ({ history, location }) => {
   var jwt = JSON.parse(localStorage.getItem("jwt"));
   // var query = JSON.parse(location.search)
   var query = queryString.parse(window.location.search);
@@ -33,10 +29,20 @@ const LandingPage = ({ history, location }) => {
   if (queryParams.has("bookingModalOpened")) {
     history.push("/");
   }
-  console.log("bookingModalOpened : ", bookingModalOpened);
-  // 0 for sign in and 1 for sign up
 
-  useEffect(() => {}, []);
+  const businessExamples = [
+    {
+      name: "Sam's butcher"
+    },
+    {
+      name: "Hungry Jacks"
+    },
+    {
+      name: "Mac Donald"
+    },
+  ]
+
+  useEffect(() => { }, []);
 
   // const flipVisibility = () => {
   //     if (visible === 1) {
@@ -95,15 +101,15 @@ const LandingPage = ({ history, location }) => {
           </div>
         </div>
       </div>
-      <Modal
+      {/* <Modal
         opened={bookingModalOpened}
         setOpened={setBookingModalOpened}
         options={options}
       >
         <Booking />
-      </Modal>
+      </Modal> */}
     </Layout>
   );
 };
 
-export default LandingPage;
+export default Archived;
