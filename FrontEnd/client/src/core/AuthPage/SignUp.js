@@ -116,9 +116,9 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
 
 
                 <div className="signup-header">
-                    <div>
+                    {/* <div>
                         <img src="img/user.png" className="user-icon" />
-                    </div>
+                    </div> */}
                     <div className="signup-label-main">Sign Up</div>
                 </div>
 

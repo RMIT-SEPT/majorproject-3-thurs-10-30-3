@@ -86,9 +86,9 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
             <form onKeyDown={handleEnter} data-testid="signin-form" className={`signin-form `}>
 
                 <div className="signin-header column">
-                    <div className="signin-element column">
+                    {/* <div className="signin-element column">
                         <img src="img/user.png" className="user-icon" />
-                    </div>
+                    </div> */}
                     <div className="signin-label-main column">Sign In</div>
                 </div>
 
