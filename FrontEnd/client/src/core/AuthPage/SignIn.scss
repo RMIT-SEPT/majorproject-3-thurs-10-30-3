@@ -53,8 +53,8 @@
         .signin-header{
             height:34%;
             text-align: center;
-            padding-bottom: 2rem;
-            padding:3rem;
+            // padding-bottom: 2rem;
+            padding-top:3rem;
 
 
             .signin-label-main{
@@ -86,10 +86,9 @@
                 // Keep Below Credentials
                 margin-top:1.7rem;
 
-                // Lee's Colouring
                 color: rgb(255, 255, 255);
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                background: linear-gradient(45deg,rgb(79, 233, 169), rgb(231, 188, 227), rgb(197, 22, 188), rgb(79, 101, 207));
+                border: none;
+                background: #FDA428;
 
                 transition: all 0.2s ease-in-out;
             }
