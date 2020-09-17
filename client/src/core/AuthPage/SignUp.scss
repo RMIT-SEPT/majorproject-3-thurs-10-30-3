@@ -1,0 +1,110 @@
+
+#root .main-cont-enlarged .signup-form{
+  
+
+}
+
+
+#root .signup-container{
+    // height: 70vh;
+    //     max-width: 80vw;
+    // max-height: 80vh;
+    transition: 0.5s all ease-in-out;
+    font-size: 1rem;
+    position: fixed;
+
+    .signup-form{
+
+        width: 80vw;
+        background-color: rgb(58, 47, 47);
+        overflow: hidden;
+        border-radius: 0.5rem;
+        // height:100%;
+        // width:100%;
+        padding:3rem;
+        color: white;
+
+
+        input{
+            color:rgb(243, 233, 233);
+            font-size:1.3rem;
+        }
+
+        .signup-header{
+            height:34%;
+            text-align: center;
+            padding-bottom:3rem;
+
+
+            .signup-label-main{
+                font-size: 2rem; 
+                font-weight: 200;
+            }
+        }
+
+        .signup-inputs{
+            padding-top: 0.5rem;
+
+            .signup-inputs-elements{
+                padding: 1rem;
+
+                input{
+                    padding: 1rem;
+                    color: black;
+                }
+
+            }
+        }
+
+
+        // #root .body {
+        //     height:75%;
+        // }
+
+        .user-icon{
+            width:15%;
+            height:15%;
+        }
+
+        .signup-button-container{
+            padding-bottom: 2rem;
+            text-align: center;
+
+            .signup-button{
+                // Making Button Like Credential Boxes
+                width: 30%;
+                padding-top: 1.5vh;
+                padding-bottom: 1.5vh;
+                font-size: 1.4rem;
+
+                // Keep Below Credentials
+                margin-top:1.7rem;
+
+                color: rgb(255, 255, 255);
+                background: #FDA428;
+                border: none;
+
+                transition: all 0.2s ease-in-out;
+            }
+            .signup-button:hover{
+                color:rgb(255, 255, 255);
+                // background: linear-gradient(90deg, rgb(231, 188, 227), rgb(197, 22, 188), rgb(79, 101, 207)) ;
+                box-shadow: 0 2px 4px 0 rgba(173, 170, 165, 0.61), 0 6px 20px 0 rgba(187, 186, 184, 0.507);
+                background-position:50% 50%;
+
+            }
+        }
+    }
+}
+
+#root .main-cont-enlarged .label, input{
+    color:rgb(255, 255, 255);
+}
+
+#root .sign-up-slide-left{
+    transform:translateX(0%)
+}
+
+#root .sign-up-slide-right{
+    transform:translateX(300%)
+}
