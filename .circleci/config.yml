@@ -1,44 +1,59 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.0.0
+
 jobs:
   frontend-test:
-    docker:
-      - image: circleci/node:12
+    working_directory: ~/majorproject-3-thurs-10-30-3/client
+    executor:
+      name: node/default
+      tag: '13'
     steps:
-      - checkout
-      - run: cd client && npm install
-      - run: cd client && npm test
+      - checkout:
+        path: ~/majorproject-3-thurs-10-30-3
+      - node/install-packages
+      - run: npm test
   frontend-build:
-    docker:
-      - image: circleci/node:12
+    working_directory: ~/majorproject-3-thurs-10-30-3/client
+    executor:
+      name: node/default
+      tag: '13'
     steps:
-      - checkout
-      - run: cd client && npm install
-      - run: cd client && npm run build
+      - checkout:
+        path: ~/majorproject-3-thurs-10-30-3
+      - node/install-packages
+      - run: npm run build
   auth-backend-test:
-    docker:
-      - image: circleci/node:12
+    working_directory: ~/majorproject-3-thurs-10-30-3/auth
+    executor:
+      name: node/default
+      tag: '13'
     steps:
-      - checkout
-      - run: cd client && npm install
-      - run: cd client && npm test
+      - checkout:
+        path: ~/majorproject-3-thurs-10-30-3
+      - node/install-packages
+      - run: npm test
   business-backend-test:
-    docker:
-      - image: circleci/node:12
+    working_directory: ~/majorproject-3-thurs-10-30-3/business
+    executor:
+      name: node/default
+      tag: '13'
     steps:
-      - checkout
-      - run: cd client && npm install
-      - run: cd client && npm test
+      - checkout:
+        path: ~/majorproject-3-thurs-10-30-3
+      - node/install-packages
+      - run: npm test
 
 workflows:
   automated-testing:
     jobs:
-      - auth-backend-test:
+      - business-backend-test:
         filters:
           branches:
             ignore:
               - master
-      - business-backend-test:
+      - auth-backend-test:
         filters:
           branches:
             ignore:
@@ -52,4 +67,4 @@ workflows:
         filters:
           branches:
             ignore:
-              - master
+              - master 
