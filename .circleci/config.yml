@@ -1,0 +1,66 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.0.0
+
+jobs:
+  frontend-test:
+    working_directory: ~/client
+    executor:
+      name: node/default
+      tag: '13'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm test
+  frontend-build:
+    working_directory: ~/client
+    executor:
+      name: node/default
+      tag: '13'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run build
+  auth-backend-test:
+    working_directory: ~/auth
+    executor:
+      name: node/default
+      tag: '13'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm test
+  business-backend-test:
+    working_directory: ~/business
+    executor:
+      name: node/default
+      tag: '13'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm test
+
+workflows:
+  automated-testing:
+    jobs:
+      - business-backend-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - auth-backend-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - frontend-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - frontend-build:
+        filters:
+          branches:
+            ignore:
+              - master
