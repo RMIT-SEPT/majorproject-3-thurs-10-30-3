@@ -23,11 +23,14 @@ jobs:
 
 workflows:
   automated-testing:
-    triggers:
-      filters:
-        branches:
-          ignore:
-            - master
     jobs:
-      - backend-build-test
-      - frontend-build-test
+      - backend-build-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - frontend-build-test:
+        filters:
+          branches:
+            ignore:
+              - master
