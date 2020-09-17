@@ -6,50 +6,46 @@ orbs:
 jobs:
   frontend-test:
     working_directory: ~/client
-    executor:
-      name: node/default
-      tag: '13'
+    executor: node/default
     steps:
       - checkout
+      - node/install-npm
       - node/install-packages
       - run: npm test
   frontend-build:
     working_directory: ~/client
-    executor:
-      name: node/default
-      tag: '13'
+    executor: node/default
     steps:
       - checkout
+      - node/install-npm
       - node/install-packages
       - run: npm run build
   auth-backend-test:
     working_directory: ~/auth
-    executor:
-      name: node/default
-      tag: '13'
+    executor: node/default
     steps:
       - checkout
+      - node/install-npm
       - node/install-packages
       - run: npm test
   business-backend-test:
     working_directory: ~/business
-    executor:
-      name: node/default
-      tag: '13'
+    executor: node/default
     steps:
       - checkout
+      - node/install-npm
       - node/install-packages
       - run: npm test
 
 workflows:
   automated-testing:
     jobs:
-      - business-backend-test:
+      - auth-backend-test:
         filters:
           branches:
             ignore:
               - master
-      - auth-backend-test:
+      - business-backend-test:
         filters:
           branches:
             ignore:
