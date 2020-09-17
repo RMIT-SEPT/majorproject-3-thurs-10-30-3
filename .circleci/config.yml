@@ -4,7 +4,8 @@ orbs:
   node: circleci/node@4.0.0
 
 jobs:
-  backend-build-test:
+  frontend-test:
+    working_directory: ~/frontend
     executor:
       name: node/default
       tag: '13'
@@ -12,7 +13,17 @@ jobs:
       - checkout
       - node/install-packages
       - run: npm test
-  frontend-build-test:
+  frontend-build:
+    working_directory: ~/frontend
+    executor:
+      name: node/default
+      tag: '13'
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run build
+  backend-build-test:
+    working_directory: ~/backend
     executor:
       name: node/default
       tag: '13'
@@ -29,7 +40,12 @@ workflows:
           branches:
             ignore:
               - master
-      - frontend-build-test:
+      - frontend-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - frontend-build:
         filters:
           branches:
             ignore:
