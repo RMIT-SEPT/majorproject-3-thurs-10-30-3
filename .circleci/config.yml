@@ -3,28 +3,28 @@ version: 2.1
 jobs:
   frontend-test:
     docker:
-      - image: circleci/node
+      - image: circleci/node:12
     steps:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm test
   frontend-build:
     docker:
-      - image: circleci/node
+      - image: circleci/node:12
     steps:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm run build
   auth-backend-test:
     docker:
-      - image: circleci/node
+      - image: circleci/node:12
     steps:
       - checkout
       - run: cd client && npm install
       - run: cd client && npm test
   business-backend-test:
     docker:
-      - image: circleci/node
+      - image: circleci/node:12
     steps:
       - checkout
       - run: cd client && npm install
