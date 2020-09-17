@@ -5,6 +5,7 @@ import Loader from '../Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import './SignIn.scss'
+
 import queryString from 'query-string';
 
 const SignIn = ({ history, visible, flipVisibility, location }) => {
@@ -71,46 +72,72 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
         }
     }
 
-    const isFilled = () => {
-        if (username !== '') {
-            return 'label label-active'
+    const isFilled = (field) => {
+        if (values[field] !== "") {
+            // Set Border of Input to Red
+            return 'form-control active'
         } else {
-            return 'label'
+            return 'form-control'
         }
     }
 
     const showForm = () => {
         return (
             <form onKeyDown={handleEnter} data-testid="signin-form" className={`signin-form `}>
-                <div className="signin-header">
-                    <div className="row justify-content-center mr-3">
+
+                <div className="signin-header column">
+                    {/* <div className="signin-element column">
                         <img src="img/user.png" className="user-icon" />
-                    </div>
-                    <h3 className="" id="" ><strong>Sign in</strong></h3>
+                    </div> */}
+                    <div className="signin-label-main column">Sign In</div>
                 </div>
+
                 <div className="signin-body">
 
-                    <div className="md-form ">
-                        <input type="email" name="username" id="Form-email1" className="form-control " onChange={handleChange('username')} />
-                        <label data-error="wrong" className={isFilled()} for="Form-email1">Your username</label>
+                    <div className="signin-element">
+
+                        {/* Label Only Used to Show Errors */}
+                        {/* <div className="signin-label">
+                            <label data-error="wrong" for="Form-email1" value={isFilled(username)}></label>
+                        </div> */}
+
+                        <div>
+                            <input type="email" name="username" id="Form-email1" className={isFilled("username")} onChange={handleChange('username')} placeholder="Username / Email" />
+                        </div>
                     </div>
 
-                    <div className="md-form ">
-                        <input type="password" name="password" id="Form-pass1" className="form-control " onChange={handleChange('password')} />
-                        <label className={isFilled()} data-error="wrong" for="Form-pass1">Your password</label>
+                    <div className="signin-element">
+
+                        {/* Label Only Used to Show Errors */}
+                        {/* <div className="signin-label">
+                            <label className={isFilled(password)} data-error="wrong" for="Form-pass1"></label>
+                        </div> */}
+
+                        <div>
+                            <input type="password" name="password" id="Form-pass1" className={isFilled("password")} onChange={handleChange('password')} placeholder="Password" />
+                        </div>
                     </div>
+
                     {error && (<div className="position-absolute showError ">{error}</div>)}
-                    <div className="row justify-content-center mr-3 mt-5">
+
+
+                    <div className="signin-button-container">
                         <button type="button" className="signin-button" onClick={handleSubmit}>Sign in</button>
                     </div>
-                    <div className="text-center my-4">
-                        Have not had account yet?
+
+
+                    <div className="text-center">
+                        <p>Don't have an Account?</p>
                     </div>
-                    <div className="text-center my-4 sign-up-link pointer" onClick={flipVisibility}>
-                        Sign up
+
+                    <div className="text-center sign-up-link" onClick={flipVisibility}>
+                        <p>Sign Up</p>
                     </div>
+
                 </div>
             </form>
+
+
         )
     }
 

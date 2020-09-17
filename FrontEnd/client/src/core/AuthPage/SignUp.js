@@ -113,54 +113,78 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
     const showForm = () => {
         return (
             <form onKeyDown={handleEnter} data-testid="signup-form" className={`signup-form`} >
-                <div class="header">
-                    <div class="row justify-content-center mr-3">
+
+
+                <div className="signup-header">
+                    {/* <div>
                         <img src="img/user.png" className="user-icon" />
-                    </div>
-                    <h3 class="" id="" ><strong>Sign Up</strong></h3>
+                    </div> */}
+                    <div className="signup-label-main">Sign Up</div>
                 </div>
-                <div class="body row">
-                    <div className="col-6">
-                        <div class="md-form ">
-                            <input type="text" id="Form-pass1" name="username" class="form-control " onChange={handleChange('username')} />
-                            <label className={isFilled("username")} data-error="wrong" for="Form-pass1">Your username</label>
+
+
+                <div class="signup-inputs JCC row">
+                    <div className="signup-inputs-column">
+                        <div className="signup-inputs-elements">
+
+                            <input type="text" id="Form-pass1" name="username" class="form-control " onChange={handleChange('username')} placeholder="Create Username" />
+
+                            {/* <label className={isFilled("username")} data-error="wrong" for="Form-pass1">Your username</label> */}
+
                         </div>
-                        <div class="md-form ">
-                            <input type="email" id="Form-email1" name="email" class="form-control " onChange={handleChange('email')} />
-                            <label data-error="wrong" className={isFilled("email")} for="Form-email1">Your email</label>
+                        <div className="signup-inputs-elements">
+
+                            <input type="email" id="Form-email1" name="email" class="form-control " onChange={handleChange('email')} placeholder="Email" />
+
+                            {/* <label data-error="wrong" className={isFilled("email")} for="Form-email1">Your email</label> */}
+
                         </div>
 
-                        <div class="md-form ">
-                            <input type="password" id="Form-pass1" name="password" class="form-control " onChange={handleChange('password')} />
-                            <label className={isFilled("password")} data-error="wrong" for="Form-pass1">Your password</label>
-                        </div>
-                    </div>
-                    <div className="col-6">
-                        <div class="md-form ">
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('name')} />
-                            <label className={isFilled("name")} data-error="wrong" for="Form-pass1">Your name</label>
-                        </div>
-                        <div class="md-form ">
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('address')} />
-                            <label className={isFilled("address")} data-error="wrong" for="Form-pass1">Your address</label>
-                        </div>
-                        <div class="md-form ">
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('phone')} />
-                            <label className={isFilled("phone")} data-error="wrong" for="Form-pass1">Your phone</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center mr-3 mt-5">
-                    <button type="button" class="signup-button" onClick={handleSubmit}>Sign Up</button>
-                </div>
-                {error && (<div className="position-absolute showError ">{error}</div>)}
+                        <div className="signup-inputs-elements">
 
-                <div className="text-center my-3">
-                    Already have account?
+                            <input type="password" id="Form-pass1" name="password" class="form-control " onChange={handleChange('password')} placeholder="Create Password" />
+
+                            {/* <label className={isFilled("password")} data-error="wrong" for="Form-pass1">Your password</label> */}
+
+                        </div>
+                    </div>
+                    <div className="signup-inputs-column">
+                        <div className="signup-inputs-elements">
+
+                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('name')} placeholder="Full Name" />
+
+                            {/* <label className={isFilled("name")} data-error="wrong" for="Form-pass1">Your name</label> */}
+
+                        </div>
+                        <div className="signup-inputs-elements">
+
+                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('address')} placeholder="Home Address" />
+
+                            {/* <label className={isFilled("address")} data-error="wrong" for="Form-pass1">Your address</label> */}
+
+                        </div>
+                        <div className="signup-inputs-elements">
+
+                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('phone')} placeholder="Phone Number" />
+
+                            {/* <label className={isFilled("phone")} data-error="wrong" for="Form-pass1">Your phone</label> */}
+
+                        </div>
+                    </div>
                 </div>
-                <div className="text-center my-4 sign-up-link pointer" onClick={flipVisibility}>
-                    Sign up
-                </div>
+
+                <div className="signup-button-container">
+                        <button type="button" className="signup-button" onClick={handleSubmit}>Sign Up</button>
+                    </div>
+
+
+                    <div className="text-center">
+                        <p>Already have an Account?</p>
+                    </div>
+
+                    <div className="text-center sign-up-link" onClick={flipVisibility}>
+                        Sign In
+                    </div>
             </form>
         )
     }
