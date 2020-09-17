@@ -5,40 +5,40 @@ orbs:
 
 jobs:
   frontend-test:
-    working_directory: ~/majorproject-3-thurs-10-30-3/client
     executor:
       name: node/default
       tag: '13'
+    working_directory: ~/majorproject-3-thurs-10-30-3/client
     steps:
       - checkout:
         path: ~/majorproject-3-thurs-10-30-3
       - node/install-packages
       - run: npm test
   frontend-build:
-    working_directory: ~/majorproject-3-thurs-10-30-3/client
     executor:
       name: node/default
       tag: '13'
+    working_directory: ~/majorproject-3-thurs-10-30-3/client
     steps:
       - checkout:
         path: ~/majorproject-3-thurs-10-30-3
       - node/install-packages
       - run: npm run build
   auth-backend-test:
-    working_directory: ~/majorproject-3-thurs-10-30-3/auth
     executor:
       name: node/default
       tag: '13'
+    working_directory: ~/majorproject-3-thurs-10-30-3/auth
     steps:
       - checkout:
         path: ~/majorproject-3-thurs-10-30-3
       - node/install-packages
       - run: npm test
   business-backend-test:
-    working_directory: ~/majorproject-3-thurs-10-30-3/business
     executor:
       name: node/default
       tag: '13'
+    working_directory: ~/majorproject-3-thurs-10-30-3/business
     steps:
       - checkout:
         path: ~/majorproject-3-thurs-10-30-3
