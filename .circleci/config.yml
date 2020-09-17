@@ -1,41 +1,34 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.0.0
-
 jobs:
   frontend-test:
-    working_directory: ~/client
-    executor: node/default
+    docker:
+      - image: circleci/node
     steps:
       - checkout
-      - node/install-npm
-      - node/install-packages
-      - run: npm test
+      - run: cd client && npm install
+      - run: cd client && npm test
   frontend-build:
-    working_directory: ~/client
-    executor: node/default
+    docker:
+      - image: circleci/node
     steps:
       - checkout
-      - node/install-npm
-      - node/install-packages
-      - run: npm run build
+      - run: cd client && npm install
+      - run: cd client && npm run build
   auth-backend-test:
-    working_directory: ~/auth
-    executor: node/default
+    docker:
+      - image: circleci/node
     steps:
       - checkout
-      - node/install-npm
-      - node/install-packages
-      - run: npm test
+      - run: cd client && npm install
+      - run: cd client && npm test
   business-backend-test:
-    working_directory: ~/business
-    executor: node/default
+    docker:
+      - image: circleci/node
     steps:
       - checkout
-      - node/install-npm
-      - node/install-packages
-      - run: npm test
+      - run: cd client && npm install
+      - run: cd client && npm test
 
 workflows:
   automated-testing:
