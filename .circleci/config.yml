@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   auth-backend-test:
-    working_directory: ~/majorproject-3-thurs-10-30-3/auth
+    working_directory: /auth
     docker:
       - image:  circleci/node:10
     steps:
