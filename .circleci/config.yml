@@ -1,24 +1,21 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.0.0
-
 jobs:
   auth-backend-test:
-    executor:
-      name: node/default
-      tag: '13'
     working_directory: ~/auth
+    docker:
+      - image:  circleci/node:10
     steps:
-      - checkout:
+      - checkout
       - run: 
           name: Install npm dependencies
           command: npm install
       - run: 
           name: Run test
           command: npm test
+   
+    
       
-
 workflows:
   automated-testing:
     jobs:
