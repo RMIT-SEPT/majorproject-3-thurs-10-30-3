@@ -7,15 +7,11 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: Go to auth repo
-          command: cd auth
-      - run: 
           name: Install npm dependencies
-          command: npm install
+          command: cd auth && npm install
       - run: 
           name: Run test
-          command: npm test
-   
+          command: cd auth && npm test
     
       
 workflows:
