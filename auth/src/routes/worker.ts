@@ -23,7 +23,6 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    console.log("/worker/signup")
 
     const { email, name, password, address, phone, businessId, shift, days } = req.body;
 

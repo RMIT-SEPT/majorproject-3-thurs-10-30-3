@@ -113,7 +113,7 @@ const LandingPage = ({ history, location }) => {
       <Layout />
       <div className="landing-page-cont row">
         <div className="first">
-          <div className="heading">Welcome to Scheduler</div>
+          <div className="heading">Welcome to Scheduler!</div>
           <div className="description">
             <div> The all-in-one Online Scheduling and Appointment Booker for your favourite local businesses. </div>
             <br></br>
