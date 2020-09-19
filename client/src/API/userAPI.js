@@ -19,21 +19,40 @@ export const getUsers = ({ token }) => {
         });
 };
 
-export const currentUser = ({ token }) => {
-    return fetch(`${API}/api/users/currentuser`, {
+export const readUser = async ({userId}) => {
+
+    var response = await fetch(`/auth/api/user/${userId}`, {
         method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`
         }
     })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    response = await response.json();
+    
+    if(response.error){
+
+    } else{
+        return response
+    }
+};
+
+export const currentUser = async () => {
+
+    var response = await fetch(`/auth/api/users/currentuser`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        }
+    })
+    response = await response.json();
+    
+    if(response.error){
+
+    } else{
+        return response
+    }
 };
 
 export const signup = user => {
@@ -72,7 +91,7 @@ export const getBusiness = user => {
 };
 
 export const signin = user => {
-    return fetch(`auth/api/users/signin`, {
+    return fetch(`/auth/api/users/signin`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -88,35 +107,39 @@ export const signin = user => {
         });
 };
 
-
-export const authenticate = (data, next) => {
-    if (typeof window !== "undefined") {
-        localStorage.setItem("jwt", JSON.stringify(data));
-        next();
-    }
-};
-
-export const signout = next => {
-    if (typeof window !== "undefined") {
-        localStorage.removeItem("jwt");
-        next();
-        return fetch(`${API}/signout`, {
-            method: "GET"
+export const signout = () => {
+    return fetch('/api/users/signout', {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+    })
+        .then(response => {
+            return response.json();
         })
-            .then(response => {
-                console.log("signout", response);
-            })
-            .catch(err => console.log(err));
-    }
+        .catch(err => {
+            console.log(err);
+        });
 };
 
-export const isAuthenticated = () => {
+
+export const isAuthenticated = async  () => {
     if (typeof window == "undefined") {
         return false;
     }
-    if (localStorage.getItem("jwt")) {
-        return JSON.parse(localStorage.getItem("jwt"));
-    } else {
-        return false;
+
+    var response = await fetch(`/auth/api/users/currentuser`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        }
+    })
+    if(response.currentUser===undefined){
+        return false
+    } else{
+        return true
     }
 };
+

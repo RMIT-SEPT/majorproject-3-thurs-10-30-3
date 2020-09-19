@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import { Route, Redirect } from "react-router-dom";
-import { isAuthenticated } from "../API/userAPI";
+import { Route, Redirect, withRouter } from "react-router-dom";
+import { currentUser  } from "../API/userAPI";
 
-const AdminRoute = ({ component, ...rest }) => {
-    return isAuthenticated() && isAuthenticated().user.role === 1? 
-    <Route {...rest} component={component} />: <Redirect to={'/noAccess'}/>
+const AdminRoute = ({ history, component, ...rest }) => {
+
+    currentUser().then((data) => {
+        if (data.currentUser.role !== 'admin') {
+            history.push('/no/access')
+        }
+    }).catch()
+
+    return <Route {...rest} component={component} />
 };
 
-export default AdminRoute;
+export default withRouter(AdminRoute);
