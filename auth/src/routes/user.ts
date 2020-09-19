@@ -39,7 +39,6 @@ router.post(
     const userJwt = jwt.sign(
       {
         id: existingUser.id,
-        name:existingUser.name,
         email: existingUser.email,
         address: existingUser.address,
         phone: existingUser.phone,
@@ -110,17 +109,6 @@ router.post('/api/users/signout', (req, res) => {
   req.session = null;
 
   res.send({});
-});
-
-router.get('/api/user/:userId', currentUser, async (req, res) => {
-  console.log("??????????????????????????")
-  const existingUser = await User.findById(req.params.userId );
-  if (!existingUser) {
-    throw new BadRequestError('User not found');
-  }
-
-  res.send(existingUser)
-
 });
 
 router.get('/api/users/currentuser', currentUser, (req, res) => {

@@ -76,9 +76,26 @@ router.post(
     if (existingUser) {
       throw new BadRequestError('Email in use');
     }
-    const user = User.build({ email,name, password, address, phone,role:'admin', businessId,shift:"",days:[] });
+    const user = User.build({ email,name, password, address, phone,role:'admin', businessId:"",shift:"",days:[] });
     await user.save();
     console.log("new user in admin sign up : ", user)
+
+    // Generate JWT
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
+        role: user.role
+      },
+      process.env.JWT_KEY!
+    );
+
+    // Store it on session object
+    req.session = {
+      jwt: userJwt,
+    };
 
     res.status(201).send(user);
   }

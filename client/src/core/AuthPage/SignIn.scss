@@ -93,14 +93,14 @@
             cursor: pointer;
         }
     }
+}
 
-    input:focus + label {
-        transform: scale(0.7, 0.7) translate(0%, -80%);
-    }
+#root input:focus + label {
+    transform: scale(0.7, 0.7) translate(0%, -80%);
+}
 
-    .label-active {
-        transform: scale(0.7, 0.7) translate(0%, -80%);
-    }
+#root .label-active {
+    transform: scale(0.7, 0.7) translate(0%, -80%);
 }
 
 #root .sign-in-slide-down {

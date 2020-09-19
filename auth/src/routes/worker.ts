@@ -37,6 +37,25 @@ router.post(
     await user.save();
     console.log("new user in worekr sign up : ", user)
 
+    // Generate JWT
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
+        role: user.role,
+        shift: user.shift,
+        businessId: user.businessId
+
+      },
+      process.env.JWT_KEY!
+    );
+
+    // Store it on session object
+    req.session = {
+      jwt: userJwt,
+    };
 
     new WorkerCreatedPublisher(natsWrapper.client).publish({ userId: user._id, businessId: user.businessId });
 
