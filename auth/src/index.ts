@@ -10,6 +10,8 @@ import { randomBytes } from 'crypto'
 const MONGO_URL = 'mongodb+srv://gpgx8nell:1256ahdk@samshop.e9sdx.mongodb.net/sept'
 
 const start = async () => {
+  console.log("pls")
+  console.log("plsgrawfrgw")
   console.log("process.env.JWT_KEY : ", process.env.JWT_KEY)
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');

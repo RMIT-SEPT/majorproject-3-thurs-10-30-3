@@ -15,7 +15,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
     }
 
     const [values, setValues] = useState({
-        username: "",
+        email: "",
         password: "",
         error: "",
         loading: false,
@@ -75,7 +75,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
     const isFilled = (field) => {
         if (values[field] !== "") {
             // Set Border of Input to Red
-            return 'form-control active'
+            return 'label-active'
         } else {
             return 'form-control'
         }
@@ -92,48 +92,30 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                     <div className="signin-label-main column">Sign In</div>
                 </div>
 
-                <div className="signin-body">
-
-                    <div className="signin-element">
-
-                        {/* Label Only Used to Show Errors */}
-                        {/* <div className="signin-label">
-                            <label data-error="wrong" for="Form-email1" value={isFilled(username)}></label>
-                        </div> */}
-
-                        <div>
-                            <input type="email" name="username" id="Form-email1" className={isFilled("username")} onChange={handleChange('username')} placeholder="Username / Email" />
-                        </div>
+                <div className="form-cont">
+                    {/* Label Only Used to Show Errors */}
+                    <div className="each-form row JCC">
+                        <input type="email" name="username" id="Form-email1"  onChange={handleChange('email')} />
+                        <label data-error="wrong" for="Form-email1" className={isFilled('password')}>Email</label>
                     </div>
 
-                    <div className="signin-element">
-
-                        {/* Label Only Used to Show Errors */}
-                        {/* <div className="signin-label">
-                            <label className={isFilled(password)} data-error="wrong" for="Form-pass1"></label>
-                        </div> */}
-
-                        <div>
-                            <input type="password" name="password" id="Form-pass1" className={isFilled("password")} onChange={handleChange('password')} placeholder="Password" />
-                        </div>
+                    <div className="each-form row JCC">
+                        <input type="password" name="password" id="Form-pass1"  onChange={handleChange('password')} />
+                        <label className={isFilled('password')} data-error="wrong" for="Form-pass1">Password</label>
                     </div>
 
                     {error && (<div className="position-absolute showError ">{error}</div>)}
+                </div>
 
 
-                    <div className="signin-button-container">
-                        <button type="button" className="signin-button" onClick={handleSubmit}>Sign in</button>
-                    </div>
-
-
+                <div className="signin-button-container">
+                    <div type="button" className="signin-button btn" onClick={handleSubmit}>Sign in</div>
                     <div className="text-center">
                         <p>Don't have an Account?</p>
                     </div>
-
                     <div className="text-center sign-up-link" onClick={flipVisibility}>
                         <p>Sign Up</p>
                     </div>
-
                 </div>
             </form>
 

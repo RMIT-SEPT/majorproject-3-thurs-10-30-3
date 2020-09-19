@@ -22,14 +22,17 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: '**/*.ts'
+          - src: 'src/**/*.ts'
             dest: .
     - image: besamly2018/sept-client
       context: client
       docker:
         dockerfile: Dockerfile
       sync:
-        manual:
-          - src: '**/*.js'
-            dest: .
-  
+        infer:
+          - 'src/**/*.js' 
+          - 'src/**/*.scss' 
+          - '**/*.png'
+          - 'content/en/**/*.md'
+
+         
