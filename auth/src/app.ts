@@ -18,7 +18,6 @@ app.use(
     secure: false,
   })
 );
-
 app.use(currentUser);
 
 app.use('/auth', authRouter);

@@ -38,10 +38,10 @@
 
 // Main component
 
-#root .main-cont{
+.main-cont{
     width:100vw;
     height:100vh;
-    background:linear-gradient(-45deg,  #bd0db4, #0d4363, rgb(214, 40, 58), rgba(226, 135, 119, 0.7));
+    background:linear-gradient(-45deg,  rgba(255, 166, 0, 0.055),  rgba(255, 166, 0, 0.308) ,  rgba(255, 166, 0, 0.705),  rgb(255, 166, 0) ) ;
     background-size: 300% 100%;
     background-position:0% 0%;
     overflow: hidden;
@@ -53,9 +53,9 @@
     // effect
 }
 
-#root .main-cont-enlarged{
-    background-position:100% 100%;
-}
+// #root .main-cont-enlarged{
+//     background-position:100% 100%;
+// }
 
 
 @keyframes enlarge{

@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  auth-backend-test:
+    docker:
+      - image:  circleci/node:10
+    steps:
+      - checkout
+      - run: 
+          name: Install npm dependencies
+          command: cd auth && npm install
+      - run: 
+          name: Run test
+          command: cd auth && npm test
+    
+      
+workflows:
+  automated-testing:
+    jobs:
+      - auth-backend-test:
+        filters:
+          branches:
+            ignore:
+              - master
