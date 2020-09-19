@@ -5,7 +5,7 @@ import Loader from '../Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import './SignIn.scss'
-
+import { errorHandler } from '../common/errorhandler'
 import queryString from 'query-string';
 
 const SignIn = ({ history, visible, flipVisibility, location }) => {
@@ -13,33 +13,34 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
     if (jwt && jwt.token) {
         history.push('/')
     }
-
+    const [error,setError]= useState("")
     const [values, setValues] = useState({
         email: "",
         password: "",
         error: "",
         loading: false,
     })
+    const { email, password, loading } = values;
 
     var query = queryString.parse(window.location.search)
     const [bookingModalOpened, setBookingModalOpened] = useState(query.bookingModalOpened ? true : false)
-    const { username, password, loading, error } = values;
 
     useEffect(() => {
 
     }, [])
 
     const handleChange = name => event => {
-        setValues({ ...values, error: false, [name]: event.target.value });
+        setValues({ ...values,  [name]: event.target.value });
+        setError("")
     };
 
     const handleSubmit = (e) => {
         // e.preventDefault()
-        signin({ username, password }).then(
+        signin({ email, password }).then(
             data => {
                 console.log("data : ", data)
-                if (data.error) {
-                    setValues({ ...values, error: data.error })
+                if (data.errors) {
+                    setError(errorHandler(data.errors))
                 }
                 else {
                     localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
@@ -91,16 +92,19 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                     </div> */}
                     <div className="signin-label-main column">Sign In</div>
                 </div>
+                <div className="error-message">
+                    {error !== "" && error}
+                </div>
 
                 <div className="form-cont">
                     {/* Label Only Used to Show Errors */}
                     <div className="each-form row JCC">
-                        <input type="email" name="username" id="Form-email1"  onChange={handleChange('email')} />
-                        <label data-error="wrong" for="Form-email1" className={isFilled('password')}>Email</label>
+                        <input type="email" name="username" id="Form-email1" onChange={handleChange('email')} />
+                        <label data-error="wrong" for="Form-email1" className={isFilled('email')}>Email</label>
                     </div>
 
                     <div className="each-form row JCC">
-                        <input type="password" name="password" id="Form-pass1"  onChange={handleChange('password')} />
+                        <input type="password" name="password" id="Form-pass1" onChange={handleChange('password')} />
                         <label className={isFilled('password')} data-error="wrong" for="Form-pass1">Password</label>
                     </div>
 

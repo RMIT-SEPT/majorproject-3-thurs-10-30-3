@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './Authentication.scss'
-import { signin, authenticate } from '../../API/userAPI'
+import { signin, authenticate, isAuthenticated } from '../../API/userAPI'
 import Loader from '../Loader'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
@@ -11,9 +11,7 @@ import SignUp from "./SignUp";
 
 const Main = ({ history }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
-    if (jwt && jwt.token) {
-        history.push('/')
-    }
+
 
     const [values, setValues] = useState({
         email: "",
@@ -27,7 +25,11 @@ const Main = ({ history }) => {
     const { email, password, loading, error } = values;
 
     useEffect(() => {
-    
+        isAuthenticated().then(isTrue => {
+            if (isTrue) {
+                history.push('/')
+            }
+        })
     }, [])
 
     const flipVisibility = () => {
@@ -40,9 +42,9 @@ const Main = ({ history }) => {
 
     return (
         <div className={`main-cont ${visible === 1 && 'main-cont-enlarged'} row align-items-center justify-content-center`}>
-            <SignIn visible={visible} flipVisibility={flipVisibility} history={history}/>
-            <SignUp visible={visible} flipVisibility={flipVisibility} history={history}/>
-         
+            <SignIn visible={visible} flipVisibility={flipVisibility} history={history} />
+            <SignUp visible={visible} flipVisibility={flipVisibility} history={history} />
+
             <Loader loading={loading} />
         </div>
     )

@@ -3,12 +3,12 @@
     // background-color: grey;
     padding: 1vw;
     position: absolute;
-    top:0;
+    top: 0;
     z-index: 1;
 
     .first {
         font-weight: 600;
-        font-size: 1.7vw;
+        font-size: 2vw;
         width: 20%;
         .img-cont {
             height: 100%;
@@ -20,7 +20,53 @@
         }
     }
 
-    .second {
-        width: 10%;
+    .signin-btn {
+        width: 7%;
+        cursor: pointer;
+        background-color: rgb(255, 136, 0);
+        color: white;
+        padding: 1vw;
+        text-align: center;
+        border-radius: 0.3vw;
+
+        &:hover {
+            background-color: rgb(226, 124, 7);
+        }
+    }
+
+    .user-name {
+        background-color: rgb(255, 136, 0);
+        color: white;
+        padding: 1vw;
+        border-radius: 0.3vw;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            border-bottom-left-radius: 0vw;
+            border-bottom-right-radius: 0vw;
+            .drop-down {
+                display: block;
+            }
+        }
+
+        .drop-down {
+            position: absolute;
+            background-color: rgb(255, 136, 0);
+            color:white;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            display: none;
+            border-bottom-left-radius: 0.3vw;
+            border-bottom-right-radius: 0.3vw;
+            div {
+                padding: 1vw;
+
+                &:hover {
+                    background-color: rgb(218, 116, 0);
+                }
+            }
+        }
     }
 }
