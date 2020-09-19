@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-/* Customer account signin tests */
+// CUSTOMER SIGN IN (user.ts)
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing email input during customer sign in', async () => {
   await request(app)
@@ -31,7 +31,6 @@ it('returns HTTP Error Code 400 (Bad Request) due to missing password input duri
     .expect(400);
 });
 
-//should this not be a 404?
 it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during customer sign in', async () => {
   await request(app)
     .post('/auth/api/users/signin')
@@ -42,13 +41,15 @@ it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to
     .expect(400);
 });
 
-// is this how i do it? shouldn't we do something else for creating user?
 it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied user having different password during customer sign in', async () => {
   await request(app)
     .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
-      password: 'password'
+      password: 'password',
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678'
     })
     .expect(201);
 
@@ -61,13 +62,79 @@ it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied 
     .expect(400);
 });
 
-// successful login
-it('returns HTTP Error Code 200 (OK) after successful sign in', async () => {
+it('returns HTTP Error Code 200 (OK) after successful customer sign in', async () => {
   await request(app)
     .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678'
+    })
+    .expect(201);
+
+  const response = await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
       password: 'password'
+    })
+    .expect(200);
+
+  expect(response.get('Set-Cookie')).toBeDefined();
+});
+
+// ADMIN SIGN IN (admin.ts)
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing email input during admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/admin/signin')
+    .send({
+      email: 'test@test.com'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format during admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/admin/signin')
+    .send({
+      email: 'incorrectemailformat',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing password input during admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/admin/signin')
+    .send({
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/admin/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied user having different password during admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/admin/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678',
+      businessId: '01234'
     })
     .expect(201);
 
@@ -75,26 +142,114 @@ it('returns HTTP Error Code 200 (OK) after successful sign in', async () => {
     .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
-      password: 'password'
+      password: 'aslkdfjalskdfj'
     })
-    .expect(200);
+    .expect(400);
 });
 
-/* Old tests */
-
-// is this right? should this not be part of the validation?
-
-it('Responds with a cookie when given valid credentials', async () => {
+it('returns HTTP Error Code 200 (OK) after successful admin sign in', async () => {
   await request(app)
-    .post('/api/users/signup')
+    .post('/auth/api/admin/signup')
     .send({
       email: 'test@test.com',
-      password: 'password'
+      password: 'password',
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678',
+      businessId: '01234'
     })
     .expect(201);
 
   const response = await request(app)
-    .post('/api/users/signin')
+    .post('/auth/api/admin/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(200);
+
+  expect(response.get('Set-Cookie')).toBeDefined();
+});
+
+// WORKER SIGN IN (worker.ts)
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing email input during worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signin')
+    .send({
+      email: 'test@test.com'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format during worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signin')
+    .send({
+      email: 'incorrectemailformat',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing password input during worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signin')
+    .send({
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied user having different password during worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678',
+      businessId: '01234'
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/auth/api/worker/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'aslkdfjalskdfj'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 200 (OK) after successful worker sign in', async () => {
+  await request(app)
+    .post('/auth/api/worker/signup')
+    .send({
+      email: 'test@test.com',
+      password: "password",
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678',
+      businessId: "5f6323eb8c491b0031f1784e",
+      shift: "09:00-16:00",
+      days: ["mon", "tue", "wed", "thu", "fri"]
+    })
+    .expect(201);
+
+  const response = await request(app)
+    .post('/auth/api/admin/signin')
     .send({
       email: 'test@test.com',
       password: 'password'
