@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-it('responds with details about the current user', async () => {
+it('responds with HTTP code 200 and customer details if customer is authenticated', async () => {
   const cookie = await global.signin();
 
   const response = await request(app)

@@ -1,6 +1,8 @@
 import request from 'supertest';
 import { app } from '../../app';
 
+/* Customer account tests */
+
 it('clears the cookie after signing out', async () => {
   await request(app)
     .post('/api/users/signup')
