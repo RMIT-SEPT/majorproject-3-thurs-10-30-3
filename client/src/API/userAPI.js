@@ -1,7 +1,9 @@
 import { BASE_URL } from "../config";
 const API = BASE_URL 
+
 export const getUsers = ({ token }) => {
-    return fetch(`${API}/users`, {
+    
+    return fetch(`/auth/users`, {
         method: "GET",
         headers: {
             Accept: "application/json",
@@ -17,10 +19,26 @@ export const getUsers = ({ token }) => {
         });
 };
 
-export const register = user => {
-    console.log("what is user : ", user)
+export const currentUser = ({ token }) => {
+    return fetch(`${API}/api/users/currentuser`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
-    return fetch(`${API}/auth/register`, {
+export const signup = user => {
+    console.log("what is user : ", user)
+    return fetch(`/auth/api/users/signup`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -36,8 +54,25 @@ export const register = user => {
         });
 };
 
+export const getBusiness = user => {
+
+    return fetch(`/business/api/business`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
 export const signin = user => {
-    return fetch(`${API}/auth/login`, {
+    return fetch(`auth/api/users/signin`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -85,53 +120,3 @@ export const isAuthenticated = () => {
         return false;
     }
 };
-
-export const deactivateAccount = ({ token, userId }) => {
-    return fetch(`${API}/deactivate/${userId}`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-    })
-        .then(data => {
-            return data
-        })
-        .catch(err => console.log(err));
-};
-
-export const reactivateAccount = ({ token, userId }) => {
-    return fetch(`${API}/reactivate/${userId}`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-    })
-        .then(data => {
-            return data
-        })
-        .catch(err => console.log(err));
-};
-
-export const createAccount = ({ token, userId, userInfo }) => {
-    return fetch(`${API}/signup`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(userInfo)
-    })
-        .then(data => {
-            return data.json();
-        })
-        .catch(err => console.log(err));
-};
-
-// export const adminRoute=()=>{
-//     console.log("adminroute function")
-// }

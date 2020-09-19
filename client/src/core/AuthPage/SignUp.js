@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useLocation, useHistory } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import './SignIn.scss'
 import './SignUp.scss'
-import { authenticate, register, signin } from '../../API/userAPI'
+import { authenticate, signup, signin } from '../../API/userAPI'
 import Parallax from 'parallax-js' // Now published on NPM
 import anime from 'animejs';
 import queryString from 'query-string';
-
+import { errorHandler } from '../common/errorhandler'
 const SignUp = ({ history, visible, flipVisibility, location }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
     if (jwt && jwt.token) {
         history.push('/')
     }
 
+    const [error, setError] = useState("")
     const [values, setValues] = useState({
-        username: "",
+        name: "",
         email: "",
         password: "",
-        name: "",
         address: "",
         phone: "",
     })
 
-    const { username, email, password, name, address, phone } = values
+    const { name, email, password, address, phone } = values
 
     const queryParams = new URLSearchParams(window.location.search)
     const [bookingModalOpened, setBookingModalOpened] = useState(queryParams.has('bookingModalOpened'))
-    const [error, setError] = useState(false)
 
     useEffect(() => {
 
@@ -34,7 +32,8 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
 
     const handleChange = name => event => {
         formValidation({ field: name, value: event.target.value })
-        setValues({ ...values, error: false, [name]: event.target.value });
+        setValues({ ...values, [name]: event.target.value });
+        setError("")
     };
 
     const formValidation = ({ field, value }) => {
@@ -51,35 +50,36 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        register({ ...values }).then(
+        signup({ ...values }).then(
             data => {
                 console.log("data : ", data)
-                if (data.error) {
-                    setValues({ ...values, error: data.error })
+                if (data.errors) {
+                    console.log("errorHandler(data.errors): ", errorHandler(data.errors))
+                    setError(errorHandler(data.errors))
                 }
-                else if (data.success === "true") {
-                    signInOnSuccess()
+                else {
+                    alert("succesful")
                 }
             })
     }
 
-    const signInOnSuccess = () => {
-        signin({ username, password }).then(
-            data => {
-                console.log("data : ", data)
-                if (data.error) {
-                    setError(data.error)
-                }
-                else {
-                    localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
-                    if (bookingModalOpened) {
-                        history.push('/?bookingModalOpened=true')
-                    } else {
-                        history.push('/')
-                    }
-                }
-            })
-    }
+    // const signInOnSuccess = () => {
+    //     signin({ ...values }).then(
+    //         data => {
+    //             console.log("data : ", data)
+    //             if (data.error) {
+    //                 setError(data.error)
+    //             }
+    //             else {
+    //                 localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
+    //                 if (bookingModalOpened) {
+    //                     history.push('/?bookingModalOpened=true')
+    //                 } else {
+    //                     history.push('/')
+    //                 }
+    //             }
+    //         })
+    // }
 
     const showError = () => {
 
@@ -123,60 +123,39 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
                 </div>
 
 
-                <div class="signup-inputs JCC row">
-                    <div className="signup-inputs-column">
-                        <div className="signup-inputs-elements">
-
-                            <input type="text" id="Form-pass1" name="username" class="form-control " onChange={handleChange('username')} placeholder="Create Username" />
-
-                            {/* <label className={isFilled("username")} data-error="wrong" for="Form-pass1">Your username</label> */}
-
+                <div class="form-cont JCC row">
+                    <div className="half">
+                        <div className="each-form">
+                            <input type="text" id="Form-pass1" name="name" class="form-control " onChange={handleChange('name')} />
+                            <label className={isFilled("name")} data-error="wrong" for="Form-pass1">Your name</label>
                         </div>
-                        <div className="signup-inputs-elements">
-
-                            <input type="email" id="Form-email1" name="email" class="form-control " onChange={handleChange('email')} placeholder="Email" />
-
-                            {/* <label data-error="wrong" className={isFilled("email")} for="Form-email1">Your email</label> */}
-
+                        <div className="each-form">
+                            <input type="email" id="Form-email1" name="email" class="form-control " onChange={handleChange('email')} />
+                            <label data-error="wrong" className={isFilled("email")} for="Form-email1">Your email</label>
                         </div>
 
-                        <div className="signup-inputs-elements">
-
-                            <input type="password" id="Form-pass1" name="password" class="form-control " onChange={handleChange('password')} placeholder="Create Password" />
-
-                            {/* <label className={isFilled("password")} data-error="wrong" for="Form-pass1">Your password</label> */}
-
+                        <div className="each-form">
+                            <input type="password" id="Form-pass1" name="password" class="form-control " onChange={handleChange('password')} />
+                            <label className={isFilled("password")} data-error="wrong" for="Form-pass1">Your password</label>
                         </div>
                     </div>
-                    <div className="signup-inputs-column">
-                        <div className="signup-inputs-elements">
-
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('name')} placeholder="Full Name" />
-
-                            {/* <label className={isFilled("name")} data-error="wrong" for="Form-pass1">Your name</label> */}
-
+                    <div className="half">
+                        <div className="each-form">
+                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('address')} />
+                            <label className={isFilled("address")} data-error="wrong" for="Form-pass1">Your address</label>
                         </div>
-                        <div className="signup-inputs-elements">
-
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('address')} placeholder="Home Address" />
-
-                            {/* <label className={isFilled("address")} data-error="wrong" for="Form-pass1">Your address</label> */}
-
+                        <div className="each-form">
+                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('phone')} />
+                            <label className={isFilled("phone")} data-error="wrong" for="Form-pass1">Your phone</label>
                         </div>
-                        <div className="signup-inputs-elements">
-
-                            <input type="text" id="Form-pass1" class="form-control " onChange={handleChange('phone')} placeholder="Phone Number" />
-
-                            {/* <label className={isFilled("phone")} data-error="wrong" for="Form-pass1">Your phone</label> */}
-
+                        <div className="error-message">
+                            {error !== "" && error}
                         </div>
                     </div>
                 </div>
 
                 <div className="signup-button-container">
-                        <button type="button" className="signup-button" onClick={handleSubmit}>Sign Up</button>
-                    </div>
-
+                    <button type="button" className="signup-button" onClick={handleSubmit}>Sign Up</button>
 
                     <div className="text-center">
                         <p>Already have an Account?</p>
@@ -185,6 +164,8 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
                     <div className="text-center sign-up-link" onClick={flipVisibility}>
                         Sign In
                     </div>
+                </div>
+
             </form>
         )
     }
