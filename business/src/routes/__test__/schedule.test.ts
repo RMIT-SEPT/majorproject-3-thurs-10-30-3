@@ -3,8 +3,6 @@ import { app } from '../../app';
 
 // ADDING SCHEDULE
 
-// missing information?
-
 // success
 
 // CANCELLING SCHEDULE
