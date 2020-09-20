@@ -37,25 +37,6 @@ router.post(
     await user.save();
     console.log("new user in worekr sign up : ", user)
 
-    // Generate JWT
-    const userJwt = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-        address: user.address,
-        phone: user.phone,
-        role: user.role,
-        shift: user.shift,
-        businessId: user.businessId
-
-      },
-      process.env.JWT_KEY!
-    );
-
-    // Store it on session object
-    req.session = {
-      jwt: userJwt,
-    };
 
     new WorkerCreatedPublisher(natsWrapper.client).publish({ userId: user._id, businessId: user.businessId });
 
@@ -69,7 +50,7 @@ router.put(
   async (req: Request, res: Response) => {
     console.log("/worker/signup")
 
-    const { name, address, phone, days, shift } = req.body;
+    const { days, shift } = req.body;
 
     const worker = await User.findOne({ _id: req.params.workerId });
 
@@ -78,9 +59,6 @@ router.put(
     }
 
     // Assign new working days and shft.
-    worker.name = name
-    worker.address = address
-    worker.phone = phone
     worker.shift = shift
     worker.days = days
 
