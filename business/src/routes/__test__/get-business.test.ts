@@ -3,7 +3,7 @@ import { app } from '../../app';
 
 // GET BUSINESSES
 
-// just give them all the businesses?
+// only one possible query for this
 
 // GET BUSINESS BY ID
 
@@ -12,11 +12,3 @@ import { app } from '../../app';
 // supplying a non existant id
 
 // supply an existing id
-
-// POST BUSINESS 
-
-// name already exists
-
-// no services listed
-
-// success
