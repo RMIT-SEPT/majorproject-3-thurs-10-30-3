@@ -1,5 +1,6 @@
 import nats, { Stan } from 'node-nats-streaming';
 
+// Class to connect to nat streaming service.
 class NatsWrapper {
   private _client?: Stan;
 

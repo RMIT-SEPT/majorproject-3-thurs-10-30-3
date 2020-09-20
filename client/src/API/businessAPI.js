@@ -1,140 +1,44 @@
-import { BASE_URL } from "../config";
-const API = BASE_URL 
 
-const SEPT_AUTH=BASE_URL+'/auth/'
+export const createBusiness = (form) => {
+    return fetch(`/business/api/business`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form)
+    })
+        .then(data => {
+            return data.json()
+        })
+        .catch(err => console.log(err));
+};
 
-export const getUsers = ({ token }) => {
-    return fetch(`${API}/users`, {
+export const getListOfBusiness = () => {
+    return fetch(`/business/api/business`, {
         method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
-};
-
-export const register = user => {
-    console.log("what is user : ", user)
-
-    return fetch(`${API}/auth/register`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-    })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
-};
-
-export const signin = user => {
-    return fetch(`${API}/auth/login`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-    })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
-};
-
-
-export const authenticate = (data, next) => {
-    if (typeof window !== "undefined") {
-        localStorage.setItem("jwt", JSON.stringify(data));
-        next();
-    }
-};
-
-export const signout = next => {
-    if (typeof window !== "undefined") {
-        localStorage.removeItem("jwt");
-        next();
-        return fetch(`${API}/signout`, {
-            method: "GET"
-        })
-            .then(response => {
-                console.log("signout", response);
-            })
-            .catch(err => console.log(err));
-    }
-};
-
-export const isAuthenticated = () => {
-    if (typeof window == "undefined") {
-        return false;
-    }
-    if (localStorage.getItem("jwt")) {
-        return JSON.parse(localStorage.getItem("jwt"));
-    } else {
-        return false;
-    }
-};
-
-export const deactivateAccount = ({ token, userId }) => {
-    return fetch(`${API}/deactivate/${userId}`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
         },
     })
         .then(data => {
-            return data
+            return data.json()
         })
         .catch(err => console.log(err));
 };
 
-export const reactivateAccount = ({ token, userId }) => {
-    return fetch(`${API}/reactivate/${userId}`, {
-        method: "POST",
+
+export const getBusiness = ({ businessId }) => {
+    return fetch(`/business/api/business/${businessId}`, {
+        method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
         },
     })
         .then(data => {
-            return data
+            return data.json()
         })
         .catch(err => console.log(err));
 };
-
-export const createAccount = ({ token, userId, userInfo }) => {
-    return fetch(`${API}/signup`, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(userInfo)
-    })
-        .then(data => {
-            return data.json();
-        })
-        .catch(err => console.log(err));
-};
-
-// export const adminRoute=()=>{
-//     console.log("adminroute function")
-// }
