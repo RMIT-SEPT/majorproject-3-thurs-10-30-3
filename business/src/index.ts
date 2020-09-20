@@ -23,15 +23,19 @@ const start = async () => {
   }
 
   try {
+    // Read enviromental variables
     var NATS_CLUSTER_ID = process.env.NATS_CLUSTER_ID
     var NATS_CLIENT_ID = process.env.NATS_CLIENT_ID
     var NATS_URL = process.env.NATS_URL
 
+    // Connect to nat streaming service.
     await natsWrapper.connect(
       NATS_CLUSTER_ID,
       NATS_CLIENT_ID,
       NATS_URL
     );
+
+    // Close connection upon app close
     natsWrapper.client.on('close', () => {
       console.log('NATS connection closed!');
       process.exit();
@@ -39,8 +43,10 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
+    // Enable event listener.
     new WorkerCreatedListener(natsWrapper.client).listen();
 
+    // Connect database
     await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -51,6 +57,7 @@ const start = async () => {
     console.error(err);
   }
 
+  // Starting listening.
   app.listen(3000, () => {
     console.log('Business service listening on port 3000!');
   });
