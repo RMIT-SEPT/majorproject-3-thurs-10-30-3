@@ -7,6 +7,7 @@ import { currentUser } from './common'
 import { authRouter } from './routes/user';
 import { adminRouter } from './routes/admin';
 import { workerRouter } from './routes/worker';
+import { superRouter } from './routes/super';
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,11 +19,12 @@ app.use(
     secure: false,
   })
 );
-app.use(currentUser);
 
+app.use(currentUser);
 app.use('/auth', authRouter);
 app.use('/auth', adminRouter);
 app.use('/auth', workerRouter);
+app.use('/auth', superRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();
