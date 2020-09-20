@@ -1,6 +1,86 @@
 import request from 'supertest';
 import { app } from '../../app';
 
+// SUPER ADMIN SIGN IN (admin.ts)
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing email input during super admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format during super admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'incorrectemailformat',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to missing password input during super admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during super admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) due to existing super admin and supplied super admin having different password during super admin sign in', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'aslkdfjalskdfj'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 200 (OK) after successful customer sign in', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+  const response = await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(200);
+});
+
 // CUSTOMER SIGN IN (user.ts)
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing email input during customer sign in', async () => {
@@ -89,7 +169,7 @@ it('returns HTTP Error Code 200 (OK) after successful customer sign in', async (
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing email input during admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com'
     })
@@ -98,7 +178,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to missing email input during 
 
 it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format during admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'incorrectemailformat',
       password: 'password'
@@ -108,7 +188,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format duri
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing password input during admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       password: 'password'
     })
@@ -117,7 +197,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to missing password input duri
 
 it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
       password: 'password'
@@ -127,7 +207,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to
 
 it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied user having different password during admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signup')
+    .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
       password: 'password',
@@ -149,7 +229,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied 
 
 it('returns HTTP Error Code 200 (OK) after successful admin sign in', async () => {
   await request(app)
-    .post('/auth/api/admin/signup')
+    .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
       password: 'password',
@@ -161,7 +241,7 @@ it('returns HTTP Error Code 200 (OK) after successful admin sign in', async () =
     .expect(201);
 
   const response = await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
       password: 'password'
@@ -175,7 +255,7 @@ it('returns HTTP Error Code 200 (OK) after successful admin sign in', async () =
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing email input during worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com'
     })
@@ -184,7 +264,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to missing email input during 
 
 it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format during worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'incorrectemailformat',
       password: 'password'
@@ -194,7 +274,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to incorrect email format duri
 
 it('returns HTTP Error Code 400 (Bad Request) due to missing password input during worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signin')
+    .post('/auth/api/users/signin')
     .send({
       password: 'password'
     })
@@ -203,7 +283,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to missing password input duri
 
 it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to existing user during worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
       password: 'password'
@@ -213,7 +293,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to email not being attached to
 
 it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied user having different password during worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signup')
+    .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
       password: 'password',
@@ -225,7 +305,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied 
     .expect(201);
 
   await request(app)
-    .post('/auth/api/worker/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
       password: 'aslkdfjalskdfj'
@@ -235,7 +315,7 @@ it('returns HTTP Error Code 400 (Bad Request) due to existing user and supplied 
 
 it('returns HTTP Error Code 200 (OK) after successful worker sign in', async () => {
   await request(app)
-    .post('/auth/api/worker/signup')
+    .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
       password: "password",
@@ -249,7 +329,7 @@ it('returns HTTP Error Code 200 (OK) after successful worker sign in', async () 
     .expect(201);
 
   const response = await request(app)
-    .post('/auth/api/admin/signin')
+    .post('/auth/api/users/signin')
     .send({
       email: 'test@test.com',
       password: 'password'

@@ -1,7 +1,147 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-// DEV NOTE: possibly should add more assertions in these tests
+// SUPER ADMIN SIGN UP (super.ts)
+
+it('returns HTTP Error Code 400 (Bad Request) upon missing secret key during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      name: 'User Name',
+      password: 'password'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon missing name during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon missing email during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon email submitted with incorrect email format (non valid email) during super admin signup', async () => {
+  return request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'notavalidemailstring',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon missing password during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon password input below minimum required length of 4 characters during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: "aaa",
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 201 (Created) upon password input at minimum required length of 4 characters during super admin signup', async () => {
+  const response = await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: "aaaa",
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+});
+
+it('returns HTTP Error Code 201 (Created) upon successful super admin signup (password between 4 and 20 characters)', async () => {
+  const response = await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+});
+
+it('returns HTTP Error Code 201 (Created) upon password input at maximum allowed length of 20 characters during super admin signup', async () => {
+  const response = await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: "aaaaaaaaaaaaaaaaaaaa",
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201)
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon password input above maximum allowed length of 20 characters during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: "aaaaaaaaaaaaaaaaaaaaa",
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
+
+it('returns HTTP Error Code 400 (Bad Request) upon attemtping to sign up with email attached to existing user during super admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(400);
+});
 
 // CUSTOMER SIGN UP (user.ts)
 
@@ -177,9 +317,32 @@ it('returns HTTP Error Code 400 (Bad Request) upon attemtping to sign up with em
 
 it('returns HTTP Error Code 400 (Bad Request) upon missing name during admin signup', async () => {
   await request(app)
-    .post('/auth/api/admin/signup')
+    .post('/auth/api/super/signup')
     .send({
       email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+  var cookie;
+
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(200).end((err, res) => {
+      cookie = res.header["set-cookie"];
+    });
+
+  await request(app)
+    .post('/auth/api/admin/signup')
+    .set("Cookie", cookies);
+    .send({
+      email: 'test2@test.com',
       password: 'password',
       address: '123 Street Name, Suburb',
       phone: '012345678',
@@ -189,6 +352,16 @@ it('returns HTTP Error Code 400 (Bad Request) upon missing name during admin sig
 });
 
 it('returns HTTP Error Code 400 (Bad Request) upon missing address during admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      name: 'superaccount',
+      password: 'password',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
   await request(app)
     .post('/auth/api/admin/signup')
     .send({
@@ -202,6 +375,16 @@ it('returns HTTP Error Code 400 (Bad Request) upon missing address during admin 
 });
 
 it('returns HTTP Error Code 400 (Bad Request) upon missing phone during admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      name: 'superaccount',
+      password: 'password',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
   await request(app)
     .post('/auth/api/admin/signup')
     .send({
@@ -316,10 +499,28 @@ it('returns HTTP Error Code 201 (Created) upon successful admin signup (password
 });
 
 it('returns HTTP Error Code 201 (Created) upon password input at maximum allowed length of 20 characters during admin signup', async () => {
+  await request(app)
+    .post('/auth/api/super/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      name: 'User Name',
+      secretKey: 'createsuper'
+    })
+    .expect(201);
+
+  await request(app)
+    .post('/auth/api/users/signin')
+    .send({
+      email: 'test@test.com',
+      password: 'password'
+    })
+    .expect(200);
+
   const response = await request(app)
     .post('/auth/api/admin/signup')
     .send({
-      email: 'test@test.com',
+      email: 'test2@test.com',
       password: "aaaaaaaaaaaaaaaaaaaa",
       name: 'User Name',
       address: '123 Street Name, Suburb',
