@@ -50,7 +50,7 @@ router.put(
   async (req: Request, res: Response) => {
     console.log("/worker/signup")
 
-    const { days, shift } = req.body;
+    const { name, address, phone, days, shift } = req.body;
 
     const worker = await User.findOne({ _id: req.params.workerId });
 
@@ -59,6 +59,9 @@ router.put(
     }
 
     // Assign new working days and shft.
+    worker.name = name
+    worker.address = address
+    worker.phone = phone
     worker.shift = shift
     worker.days = days
 
