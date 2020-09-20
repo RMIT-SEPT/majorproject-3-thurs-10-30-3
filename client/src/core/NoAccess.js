@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import './NoAccess.scss'
 
 const NoAccess = ({ children }) => {
+    console.log("")
     return (
         <>
             <Layout />
