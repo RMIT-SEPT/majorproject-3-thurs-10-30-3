@@ -47,7 +47,7 @@ router.post(
     // Create and save new business doc.
     const newBusiness = Business.build({ name, serviceType, serviceProvided });
     await newBusiness.save();
-    res.status(200).send(newBusiness);
+    res.status(201).send(newBusiness);
   }
 );
 
