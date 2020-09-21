@@ -4,7 +4,17 @@ import { app } from '../../app';
 // CURRENT USER DATA
 
 it('returns HTTP Error Code 401 (Unauthorized) due to attempting to retreive current user data without being logged in', async () => {
-    // need to fix code for super before i configure this
+    const response = await request(app)
+        .post('/auth/api/user/id')
+        .send({
+            email: 'test@test.com',
+            password: 'password',
+            name: 'User Name',
+            address: '123 Street Name, Suburb',
+            phone: '012345678'
+        });
+
+    expect(response.status).toEqual(401);
 });
 
 it('returns HTTP Error Code 200 (OK) after successfully retreiving super admin current user data', async () => {

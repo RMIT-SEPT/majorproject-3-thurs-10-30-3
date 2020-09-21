@@ -38,8 +38,9 @@ it('returns HTTP Error Code 401 (Unauthorized) after attempting to log out of ad
 });
 
 it('returns HTTP Error Code 200 (OK) on successful log out of admin account', async () => {
-  await request(app)
+  const response = await request(app)
     .post('/auth/api/admin/signup')
+    .set("Cookie", global.signin())
     .send({
       email: 'test@test.com',
       password: "password",
@@ -47,8 +48,9 @@ it('returns HTTP Error Code 200 (OK) on successful log out of admin account', as
       address: '123 Street Name, Suburb',
       phone: '012345678',
       businessId: '01234'
-    })
-    .expect(201);
+    });
+
+  expect(response.status).toEqual(200);
 
   await request(app)
     .post('/auth/api/users/signout')
@@ -66,8 +68,9 @@ it('returns HTTP Error Code 401 (Unauthorized) after attempting to log out of wo
 });
 
 it('returns HTTP Error Code 200 (OK) on successful log out of worker account', async () => {
-  await request(app)
+  const response = await request(app)
     .post('/auth/api/worker/signup')
+    .set("Cookie", global.signin())
     .send({
       email: 'test@test.com',
       password: "aaaa",
@@ -77,8 +80,9 @@ it('returns HTTP Error Code 200 (OK) on successful log out of worker account', a
       businessId: "5f6323eb8c491b0031f1784e",
       shift: "09:00-16:00",
       days: ["mon", "tue", "wed", "thu", "fri"]
-    })
-    .expect(201);
+    });
+
+  expect(response.status).toEqual(200);
 
   await request(app)
     .post('/auth/api/users/signout')

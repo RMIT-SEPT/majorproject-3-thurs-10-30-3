@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body, check } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '../common';
+import { validateRequest, BadRequestError, NotAuthorizedError } from '../common';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
@@ -122,8 +122,12 @@ router.post(
 User sign out
 ================*/
 router.post('/api/users/signout', (req, res) => {
- 
-  // Empty cookie session
+
+  // if user is already logged out, throw unauthorized error
+  if (req.session == null) {
+    throw new NotAuthorizedError();
+  }
+
   req.session = null;
   res.send({});
 });

@@ -6,9 +6,8 @@ export const requireSuper = (
   res: Response,
   next: NextFunction
 ) => {
-  if (req.currentUser?.role!=='super') {
+  if (req.currentUser?.role !== 'super') {
     throw new NotAuthorizedError();
   }
-  console.log("should not come here")
   next();
 };
