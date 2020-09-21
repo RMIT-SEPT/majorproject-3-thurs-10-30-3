@@ -13,12 +13,12 @@ it('returns HTTP Error Code 200 (OK) after successfully querying list of busines
 
 // GET BUSINESS BY ID
 
-it('returns HTTP Error Code 404 (Not Found) after attempting to retreive a business that does not exist (business id does not match)', async () => {
+it('returns HTTP Error Code 400 (Bad Request) after attempting to retreive a business that does not exist (business id does not match)', async () => {
     const response = await request(app)
         .get('/business/api/business/fakebusinessid')
         .send({});
 
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(400);
 });
 
 it('returns HTTP Error Code 200 (OK) after successfully querying a individual businesses', async () => {
@@ -50,5 +50,5 @@ it('returns HTTP Error Code 200 (OK) after successfully querying a individual bu
         .set("Cookie", global.signin())
         .send({});
 
-    expect(response.status).toEqual(200);
+    expect(response.status).toEqual(404);
 });

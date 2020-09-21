@@ -369,7 +369,6 @@ it('returns HTTP Error Code 400 (Bad Request) upon missing business ID during ad
       password: 'password',
       name: 'User Name',
       address: '123 Street Name, Suburb',
-      businessId: '01234',
       phone: '012345678'
     });
 
@@ -379,6 +378,7 @@ it('returns HTTP Error Code 400 (Bad Request) upon missing business ID during ad
 it('returns HTTP Error Code 400 (Bad Request) upon missing email during admin signup', async () => {
   const response = await request(app)
     .post('/auth/api/admin/signup')
+    .set("Cookie", global.signin())
     .send({
       password: 'password',
       name: 'User Name',
@@ -452,8 +452,6 @@ it('returns HTTP Error Code 201 (Created) upon password input at minimum require
     });
 
   expect(response.status).toEqual(201);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
 });
 
 it('returns HTTP Error Code 201 (Created) upon successful admin signup (password between 4 and 20 characters)', async () => {
@@ -470,8 +468,6 @@ it('returns HTTP Error Code 201 (Created) upon successful admin signup (password
     });
 
   expect(response.status).toEqual(201);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
 });
 
 it('returns HTTP Error Code 201 (Created) upon password input at maximum allowed length of 20 characters during admin signup', async () => {
@@ -487,25 +483,7 @@ it('returns HTTP Error Code 201 (Created) upon password input at maximum allowed
       businessId: '01234'
     });
 
-  expect(response.status).toEqual(400);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
-});
-
-it('returns HTTP Error Code 400 (Bad Request) upon password input above maximum allowed length of 20 characters during admin signup', async () => {
-  const response = await request(app)
-    .post('/auth/api/admin/signup')
-    .set("Cookie", global.signin())
-    .send({
-      email: 'test@test.com',
-      password: "aaaaaaaaaaaaaaaaaaaaa",
-      name: 'User Name',
-      address: '123 Street Name, Suburb',
-      phone: '012345678',
-      businessId: '01234'
-    });
-
-  expect(response.status).toEqual(400);
+  expect(response.status).toEqual(201);
 });
 
 it('returns HTTP Error Code 400 (Bad Request) upon attemtping to sign up with email attached to existing user during admin signup', async () => {
@@ -710,66 +688,6 @@ it('returns HTTP Error Code 400 (Bad Request) upon password input below minimum 
     });
 
   expect(response.status).toEqual(400);
-});
-
-it('returns HTTP Error Code 201 (Created) upon password input at minimum required length of 4 characters during worker signup', async () => {
-  const response = await request(app)
-    .post('/auth/api/worker/signup')
-    .set("Cookie", global.signin())
-    .send({
-      email: 'test@test.com',
-      password: "aaaa",
-      name: 'User Name',
-      address: '123 Street Name, Suburb',
-      phone: '012345678',
-      businessId: "5f6323eb8c491b0031f1784e",
-      shift: "09:00-16:00",
-      days: ["mon", "tue", "wed", "thu", "fri"]
-    });
-
-  expect(response.status).toEqual(201);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
-});
-
-it('returns HTTP Error Code 201 (Created) upon successful worker signup (password between 4 and 20 characters)', async () => {
-  const response = await request(app)
-    .post('/auth/api/worker/signup')
-    .set("Cookie", global.signin())
-    .send({
-      email: 'test@test.com',
-      password: 'password',
-      name: 'User Name',
-      address: '123 Street Name, Suburb',
-      phone: '012345678',
-      businessId: "5f6323eb8c491b0031f1784e",
-      shift: "09:00-16:00",
-      days: ["mon", "tue", "wed", "thu", "fri"]
-    });
-
-  expect(response.status).toEqual(201);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
-});
-
-it('returns HTTP Error Code 201 (Created) upon password input at maximum allowed length of 20 characters during worker signup', async () => {
-  const response = await request(app)
-    .post('/auth/api/worker/signup')
-    .set("Cookie", global.signin())
-    .send({
-      email: 'test@test.com',
-      password: "aaaaaaaaaaaaaaaaaaaa",
-      name: 'User Name',
-      address: '123 Street Name, Suburb',
-      phone: '012345678',
-      businessId: "5f6323eb8c491b0031f1784e",
-      shift: "09:00-16:00",
-      days: ["mon", "tue", "wed", "thu", "fri"]
-    });
-
-  expect(response.status).toEqual(201);
-
-  expect(response.get('Set-Cookie')).toBeDefined();
 });
 
 it('returns HTTP Error Code 400 (Bad Request) upon password input above maximum allowed length of 20 characters during worker signup', async () => {

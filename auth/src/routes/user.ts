@@ -123,13 +123,8 @@ User sign out
 ================*/
 router.post('/api/users/signout', (req, res) => {
 
-  // if user is already logged out, throw unauthorized error
-  if (req.session == null) {
-    throw new NotAuthorizedError();
-  }
-
   req.session = null;
-  res.send({});
+  res.status(200).send({});
 });
 
 /*=============== 

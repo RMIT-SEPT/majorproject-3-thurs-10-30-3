@@ -4,10 +4,21 @@ import { app } from '../../app';
 // ADDING SCHEDULE
 
 it('returns HTTP Error Code 404 (Not Found) when attempting to add to business that does not exist', async () => {
+    const response = await request(app)
+        .post('/business/api/create/schedule/id')
+        .send({
+            userID: 'notfound',
+            workerID: 'notfound',
+            scheduledTime: '11:00-11:50',
+            date: '2020-11-03',
+            serviceType: ['Service One']
+        });
 
+    expect(response.status).toEqual(404);
 });
 
-it('returns HTTP Error Code 201 (Created) for schedule creation', async () => {
+it('returns HTTP Error Code 404 (Not Found) when attempting to create schedule with invalid user ID and worker ID', async () => {
+    // Create business
     const setup_response_business = await request(app)
         .post('/business/api/business')
         .set("Cookie", global.signin())
@@ -27,21 +38,19 @@ it('returns HTTP Error Code 201 (Created) for schedule creation', async () => {
         });
 
     expect(setup_response_business.status).toEqual(201);
+    expect(setup_response_business.body._id).toBeDefined();
 
-    // worker must be created
-
-    // user must be created
-
+    // Make schedule request
     const response = await request(app)
         .post('/business/api/create/schedule/' + setup_response_business.body._id)
         .send({
-            userID: '',
-            workerID: '',
-            scheduledTime: '',
-            date: '',
-            serviceType: ''
+            userID: 'notfound',
+            workerID: 'notfound',
+            scheduledTime: '11:00-11:50',
+            date: '2020-11-03',
+            serviceType: ['Service One']
         });
 
-    expect(response.status).toEqual(201);
+    expect(response.status).toEqual(404);
 
 });
