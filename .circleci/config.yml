@@ -12,12 +12,29 @@ jobs:
       - run: 
           name: Run test
           command: cd auth && npm test
+
+  business-backend-test:
+    docker:
+      - image:  circleci/node:10
+    steps:
+      - checkout
+      - run: 
+          name: Install npm dependencies
+          command: cd business && npm install
+      - run: 
+          name: Run test
+          command: cd business && npm test
     
       
 workflows:
   automated-testing:
     jobs:
       - auth-backend-test:
+        filters:
+          branches:
+            ignore:
+              - master
+      - business-backend-test:
         filters:
           branches:
             ignore:
