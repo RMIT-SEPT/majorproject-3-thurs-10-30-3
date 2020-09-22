@@ -3,7 +3,6 @@
 # Group 3.THURS-10.30-3
 
 ## Members
-* Nguyen, Anh (s3616128)
 * Brown, David (s3785894)
 * Gust, Mitchell (s3782095)
 * Lee, SangYeon (s3742751)

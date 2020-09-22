@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body, check } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { validateRequest, BadRequestError } from '../common';
+import { validateRequest, BadRequestError, NotAuthorizedError } from '../common';
 
 import { Password } from '../services/password';
 import { User } from '../models/user';
@@ -127,7 +127,7 @@ router.post('/api/users/signout', (req, res) => {
 
   // Empty cookie session
   req.session = null;
-  res.send({});
+  res.status(200).send({});
 });
 
 /*=============== 
