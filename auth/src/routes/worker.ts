@@ -60,12 +60,16 @@ router.put(
     body('shift')
       .isLength({ min: 11, max: 11 })
       .withMessage('Shift is not in correct form 00:00-00:00'),
+    check('name').not().isEmpty().withMessage('Name must be provided'),
+    check('address').not().isEmpty().withMessage('Address must be provided'),
+    check('phone').not().isEmpty().withMessage('Phone must be provided'),
     check('days').not().isEmpty().isArray().withMessage('Days should be array form')
-  ]
-  , requireAdmin,
+  ],
+  validateRequest,
+  requireAdmin,
   async (req: Request, res: Response) => {
 
-    const { days, shift } = req.body;
+    const {name, address, phone,  days, shift } = req.body;
     const worker = await User.findOne({ _id: req.params.workerId });
 
     // If worker does not exists, send bad request error.
@@ -74,6 +78,9 @@ router.put(
     }
 
     // Assign new working days and shft.
+    worker.name = name
+    worker.address = address
+    worker.phone = phone
     worker.shift = shift
     worker.days = days
 

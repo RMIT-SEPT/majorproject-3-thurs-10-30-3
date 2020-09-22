@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: www.sept-dev.xyz
+    - host: sept.dev
       http:
         paths:
           - path: /auth/?(.*)
