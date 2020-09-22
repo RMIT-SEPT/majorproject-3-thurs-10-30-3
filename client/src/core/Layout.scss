@@ -5,6 +5,7 @@
     position: absolute;
     top: 0;
     z-index: 1;
+    width:98%;
 
     .first {
         font-weight: 600;
@@ -35,6 +36,7 @@
     }
 
     .user-name {
+        margin-right:2vw;
         background-color: rgb(255, 136, 0);
         color: white;
         padding: 1vw;
@@ -55,11 +57,9 @@
             background-color: rgb(255, 136, 0);
             color:white;
             top: 100%;
-            left: 0;
-            width: 100%;
+            right:0;
+            width: 14vw;
             display: none;
-            border-bottom-left-radius: 0.3vw;
-            border-bottom-right-radius: 0.3vw;
             div {
                 padding: 1vw;
 

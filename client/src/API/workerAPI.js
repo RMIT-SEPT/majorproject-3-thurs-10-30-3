@@ -3,7 +3,7 @@ export const createWorker = user => {
     console.log("what is user : ", user)
     // const { email,name, password, address, phone,businessId } = req.body;
 
-    return fetch(`/auth/api/admin/signup`, {
+    return fetch(`/auth/api/worker/signup`, {
         method: "POST",
         headers: {
             Accept: "application/json",
