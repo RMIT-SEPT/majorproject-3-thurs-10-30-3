@@ -8,6 +8,7 @@ interface ScheduleAttrs {
   workerId: String;
   scheduledTime: String;
   serviceType: Array<any>;
+  businessId:String;
   date: String;
 }
 
@@ -24,6 +25,7 @@ interface ScheduleDoc extends mongoose.Document {
   workerId: String;
   scheduledTime: String;
   serviceType: Array<any>;
+  businessId:String;
   date: String;
 }
 
@@ -34,6 +36,10 @@ const scheduleSchema = new mongoose.Schema(
       required: true
     },
     workerId: {
+      type: String,
+      required: true
+    },
+    businessId: {
       type: String,
       required: true
     },

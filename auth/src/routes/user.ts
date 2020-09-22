@@ -52,6 +52,8 @@ router.post(
         role: existingUser.role,
         shfit: existingUser.shift,
         businessId: existingUser.businessId,
+        schedules: existingUser.schedules,
+        days: existingUser.days
       },
       process.env.JWT_KEY!
     );
@@ -123,6 +125,7 @@ User sign out
 ================*/
 router.post('/api/users/signout', (req, res) => {
 
+  // Empty cookie session
   req.session = null;
   res.status(200).send({});
 });
@@ -148,6 +151,21 @@ Read current user from cookie
 ================================*/
 router.get('/api/users/currentuser', currentUser, (req, res) => {
   res.send({ currentUser: req.currentUser || null });
+});
+
+
+/*=============================== 
+Read user data
+================================*/
+router.get('/api/user/', currentUser, async (req, res) => {
+
+  var user = await User.findById(req.currentUser.id)
+  if (!user) {
+    throw new BadRequestError("User is not found")
+  }
+
+  res.send({ currentUser: user });
+
 });
 
 export { router as authRouter };

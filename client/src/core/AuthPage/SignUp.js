@@ -58,7 +58,7 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
                     setError(errorHandler(data.errors))
                 }
                 else {
-                    alert("succesful")
+                    alert("Your account is succesfully created. Please sign in")
                 }
             })
     }

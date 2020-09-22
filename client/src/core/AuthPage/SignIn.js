@@ -43,13 +43,14 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                     setError(errorHandler(data.errors))
                 }
                 else {
-                    localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
-
-                    if (bookingModalOpened) {
-                        history.push('/?bookingModalOpened=true')
-                    } else {
+                    if(data.role==="super"){
+                        history.push('/super/create/admin')
+                    } else if(data.role==="admin"){
+                        history.push('/admin/create/worker')
+                    } else{
                         history.push('/')
                     }
+                   
                 }
             })
     }

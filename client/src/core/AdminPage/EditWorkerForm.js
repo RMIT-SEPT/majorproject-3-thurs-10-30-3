@@ -33,7 +33,6 @@ const EditWorkerForm = ({ history, reference, worker }) => {
       if (data.errors) {
         alert(errorHandler(data.errors))
       } else {
-        console.log("Data : ", data)
         window.location.reload()
         
       }

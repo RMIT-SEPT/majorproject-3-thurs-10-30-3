@@ -5,8 +5,9 @@ import { currentUser } from "../API/userAPI";
 const SuperRoute = ({ history, component, ...rest }) => {
 
     currentUser().then((data) => {
-        if (data.currentUser.role !== 'super') {
+        if (data.currentUser===null || data.currentUser.role !== 'super') {
             history.push('/no/access')
+            window.location.reload()
         }
     }).catch()
 

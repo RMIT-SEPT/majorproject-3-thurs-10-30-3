@@ -37,6 +37,24 @@ export const readUser = async ({userId}) => {
     }
 };
 
+export const readCurrentUser = async () => {
+
+    var response = await fetch(`/auth/api/user`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        }
+    })
+    response = await response.json();
+    
+    if(response.error){
+
+    } else{
+        return response
+    }
+};
+
 export const currentUser = async () => {
 
     var response = await fetch(`/auth/api/users/currentuser`, {
@@ -108,7 +126,7 @@ export const signin = user => {
 };
 
 export const signout = () => {
-    return fetch('/api/users/signout', {
+    return fetch('/auth/api/users/signout', {
         method: "POST",
         headers: {
             Accept: "application/json",

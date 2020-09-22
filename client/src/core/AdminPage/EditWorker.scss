@@ -1,20 +1,26 @@
+.edit-worker-cont {
 
+    background-color:white;
+    padding:3vw;
+    border-radius: 0.3vw;
 
-.table-cont{
-    width:70vw;
-    text-align: left;
+    .table-cont {
+        width: 70vw;
+        text-align: left;
 
+        td{
+            border-bottom:0.1vw solid grey;
+        }
 
+        th {
+            // margin-left: 2vw;
+            // margin-right: 2vw;
+        }
 
-    th{
-        margin-left:2vw;
-        margin-right:2vw;
+        .edit-btn {
+            background-color: rgb(88, 88, 88);
+            padding: 0.3vw 0.6vw 0.3vw 0.6vw;
+            color: white;
+        }
     }
-
-    .edit-btn{
-        background-color: rgb(88, 88, 88);
-        padding:0.3vw 0.6vw 0.3vw 0.6vw;
-        color:white;
-    }
-
 }
