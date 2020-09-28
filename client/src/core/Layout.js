@@ -51,18 +51,26 @@ const Layout = ({ children }) => {
                 </>
             )
         } else if (user.role === "admin") {
-            return(
+            return (
                 <>
                     <div onClick={() => history.push('/admin/create/worker')}>Create worker</div>
                     <div onClick={() => history.push('/admin/edit/worker')}>Edit worker</div>
                 </>
             )
 
-        }else if (user.role === "user") {
-            return(
+        } else if (user.role === "worker") {
+            return (
+                <>
+                    <div onClick={() => history.push('/worker/profile')}>Profile</div>
+                    <div onClick={() => history.push('/worker/schedule')}>History</div>
+                </>
+            )
+
+        } else if (user.role === "user") {
+            return (
                 <>
                     <div onClick={() => history.push('/user/profile')}>Profile</div>
-                    <div onClick={() => history.push('/user/history')}>History</div>
+                    <div onClick={() => history.push('/user/schedule')}>History</div>
                 </>
             )
 

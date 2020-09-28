@@ -157,7 +157,7 @@ router.get('/api/users/currentuser', currentUser, (req, res) => {
 /*=============================== 
 Read user data
 ================================*/
-router.get('/api/user/', currentUser, async (req, res) => {
+router.get('/api/user', currentUser, async (req, res) => {
 
   var user = await User.findById(req.currentUser.id)
   if (!user) {

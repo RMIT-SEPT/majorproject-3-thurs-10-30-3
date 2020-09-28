@@ -2,15 +2,33 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { createSchedule } from "../../API/businessAPI";
 import "./Confirm.scss"
-import { filterScheduleOnDateAndWorker, formatDate } from "./Calculate"
+import { parseToInt, parseToString, formatDate } from "./Calculate"
 import { errorHandler } from "../common/errorhandler";
 const Confirm = ({ history, reference, selectedDate, worker, selectedTime, selectedBusiness, serviceType, user }) => {
     const { setOpened } = reference.current
+
+
+    const calTime = () => {
+        var totalServiceTime = 0
+        serviceType.map((s) => {
+            totalServiceTime = totalServiceTime + parseInt(s.time)
+        })
+
+        var intStartTime = parseToInt(selectedTime)
+        var intFinishTime = intStartTime + totalServiceTime
+        var parsedFinishTime= parseToString(intFinishTime)
+
+        return `${selectedTime}-${parsedFinishTime}`
+    }
+
     const handleSubmit = () => {
         var businessId = selectedBusiness._id
         var userId = user.id
         var workerId = worker._id
-        var scheduledTime = selectedTime
+
+
+
+        var scheduledTime = calTime()
         // var serviceType = serviceType
 
         var formattedDate = formatDate(selectedDate)

@@ -1,12 +1,12 @@
 
 
-const parseToInt = (time) => {
+export const parseToInt = (time) => {
     var hour = parseInt(time.slice(0, 2));
     var minute = parseInt(time.slice(4, 6));
     return hour * 60 + minute
 }
 
-const parseToString = (time) => {
+export const parseToString = (time) => {
     var hour = parseInt(time / 60)
     var minute = time % 60
 

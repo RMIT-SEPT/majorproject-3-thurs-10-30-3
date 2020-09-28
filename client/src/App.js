@@ -13,6 +13,10 @@ import CreateWorker from './core/AdminPage/CreateWorker';
 import EditWorker from './core/AdminPage/EditWorker';
 import NoAccess from './core/NoAccess';
 import UserHistory from './core/UserPage/UserHistory'
+import UserProfile from './core/UserPage/UserProfile'
+import WorkerRoute from './auth/WorkerRoute';
+import WorkerHistory from './core/WorkerPage/WorkerHistory';
+import WorkerProfile from './core/WorkerPage/WorkerProfile';
 
 function App() {
   return (
@@ -21,7 +25,11 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/app/authentication" exact component={Authentication} />
         <Route path="/no/access" exact component={NoAccess} />
-        <PrivateRoute path="/user/history" exact component={UserHistory} />
+        <PrivateRoute path="/user/schedule" exact component={UserHistory} />
+        <PrivateRoute path="/user/profile" exact component={UserProfile} />
+
+        <WorkerRoute path="/worker/profile" exact component={WorkerProfile} />
+        <WorkerRoute path="/worker/schedule" exact component={WorkerHistory} />
 
         <SuperRoute path="/super/create/business" exact component={CreateBusiness} />
         <SuperRoute path="/super/create/admin" exact component={CreateAdmin} />
