@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import "./CreateBusiness.scss";
-import Layout from "../Layout";
-import queryString from "query-string";
 import { createBusiness } from "../../API/businessAPI"
 import { errorHandler } from "../common/errorhandler";
 import SuperLayout from "./SuperLayout";
@@ -92,7 +83,6 @@ const CreateBusiness = ({ history, location }) => {
   return (
     <SuperLayout >
       <div className="super-cont row AIC JCC">
-
         {createBusinessForm()}
       </div>
     </SuperLayout>

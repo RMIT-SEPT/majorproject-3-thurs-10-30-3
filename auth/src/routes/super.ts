@@ -1,12 +1,8 @@
 import express, { Request, Response } from 'express';
 import { body, check } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '../common';
 
-import { Password } from '../services/password';
 import { User } from '../models/user';
-import { currentUser, requireSuper, requireAdmin } from '../common';
-
 const router = express.Router();
 
 interface bodyPayload {

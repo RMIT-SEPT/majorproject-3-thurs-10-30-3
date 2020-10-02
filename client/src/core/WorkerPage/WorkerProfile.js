@@ -1,17 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import UserLayout from "./WorkerLayout";
-import { createWorker, } from "../../API/workerAPI"
-import { errorHandler } from "../common/errorhandler";
 import { readCurrentUser, readUser } from "../../API/userAPI";
-import { getBusiness, cancelSchedule } from "../../API/businessAPI";
-import Modal from "../../Template/Modal"
 import "./WorkerProfile.scss"
 
 const WorkerProfile = ({ history, location }) => {

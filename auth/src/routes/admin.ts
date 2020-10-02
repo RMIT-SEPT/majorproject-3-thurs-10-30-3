@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { body, check } from 'express-validator';
 import { validateRequest, BadRequestError } from '../common';
 import { User } from '../models/user';
-import { currentUser,requireSuper,requireAdmin } from '../common';
+import { requireSuper } from '../common';
 
 const router = express.Router();
 

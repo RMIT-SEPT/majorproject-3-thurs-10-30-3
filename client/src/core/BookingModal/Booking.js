@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { currentUser, readUser } from "../../API/userAPI";
+import {  readUser } from "../../API/userAPI";
 import './Booking.scss'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { calculateAvailability, filterScheduleOnDateAndWorker } from './Calculate'
+import { calculateAvailability } from './Calculate'
 import Modal from "../../Template/Modal"
 import Confirm from "./Confirm";
 

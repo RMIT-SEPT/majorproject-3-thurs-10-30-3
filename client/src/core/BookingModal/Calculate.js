@@ -31,7 +31,7 @@ const removeUnavailableTime = (arr, schedules, totalServiceTime) => {
         var startTimeInMinute = parseToInt(startTime)
         var finishTimeInMinute = parseToInt(finishTime)
 
-        // remove in array from start time to finish time
+        // Remove in array from start time to finish time
         arr = arr.filter(t => {
             if (t >= startTimeInMinute && t < finishTimeInMinute) {
                 return false
@@ -39,7 +39,6 @@ const removeUnavailableTime = (arr, schedules, totalServiceTime) => {
                 return true
             }
         })
-        // console.log("arr after filter1: ", arr)
 
         arr = arr.filter(t => {
             if (arr.includes(t + totalServiceTime)) {
@@ -48,11 +47,9 @@ const removeUnavailableTime = (arr, schedules, totalServiceTime) => {
                 return false
             }
         })
-        // console.log("arr after filter2: ", arr)
 
     })
 
-    // console.log("arr afte filtering :", arr)
     return arr
 }
 
@@ -60,8 +57,6 @@ const populdateAvailableTime = (startTimeInMinute, finishTimeInMinute) => {
     var arr = []
     var a = startTimeInMinute
     while (a <= finishTimeInMinute) {
-        // console.log("A : ", a, " | finishTimeInMinute : ", finishTimeInMinute)
-        // newArr.push(parseToString(a))
         arr.push(a)
         a = a + 10
     }
@@ -70,33 +65,22 @@ const populdateAvailableTime = (startTimeInMinute, finishTimeInMinute) => {
 }
 
 export const calculateAvailability = ({ shift, schedules, totalServiceTime, worker, date }) => {
-
     var filteredSchedule = filterScheduleOnDateAndWorker({ date, schedules, worker })
     if (filteredSchedule === false) return []
 
     var startTime = shift.slice(0, 5);
     var finishTime = shift.slice(6, 11);
-    // console.log(startTime)
-    // console.log(finishTime)
+   
     var startTimeInMinute = parseToInt(startTime)
     var finishTimeInMinute = parseToInt(finishTime)
 
-    // console.log(startTimeInMinute)
-    // console.log(finishTimeInMinute)
-
     var availableTimeArr = populdateAvailableTime(startTimeInMinute, finishTimeInMinute)
-
-
-
     var filteredArr = removeUnavailableTime(availableTimeArr, filteredSchedule, totalServiceTime,)
-
-    console.log("before parse to stirng : ", filteredArr)
     return filteredArr.map(t => parseToString(t))
 }
 
 
 const getDayOfWeek = (date) => {
-
     if (date === 0) {
         return 'sun'
     } else if (date === 1) {
@@ -121,19 +105,13 @@ export const filterScheduleOnDateAndWorker = ({ date, schedules, worker }) => {
     const selectedDate =formatDate(date)
 
     var filteredSchedule = schedules.filter(s => {
-        console.log("s.date : ", s.date, " selectedDate : ", selectedDate)
-        console.log("s.name === worker.name ", s.workerId, worker._id)
-        console.log(JSON.stringify(s.workerId) === JSON.stringify(worker._id))
-
-        console.log(worker.days, getDayOfWeek(date.getDay()))
-        console.log(worker.days.includes(getDayOfWeek(date.getDay())))
+    
         if (JSON.stringify(s.workerId) === JSON.stringify(worker._id) && s.date === selectedDate) {
             return true
         } else {
             return false
         }
     })
-    console.log("filteredSchedule : ", filteredSchedule)
 
     return filteredSchedule
 }

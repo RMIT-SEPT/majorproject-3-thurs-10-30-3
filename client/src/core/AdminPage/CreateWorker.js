@@ -1,11 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import AdminLayout from "./AdminLayout";
 import { createWorker, } from "../../API/workerAPI"
 import { errorHandler } from "../common/errorhandler";

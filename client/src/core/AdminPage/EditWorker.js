@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import SuperLayout from "./AdminLayout";
-import { createWorker, } from "../../API/workerAPI"
-import { errorHandler } from "../common/errorhandler";
 import "./EditWorker.scss";
 import { currentUser, readUser } from "../../API/userAPI";
 import { getBusiness } from "../../API/businessAPI";
@@ -57,18 +48,6 @@ const EditWorker = ({ history, location }) => {
         }
       }).catch()
     })
-  }
-
-  const handleSubmit = (e) => {
-    // createWorker({ ...values, days, businessId: user.businessId }).then(data => {
-    //   if (data.errors) {
-    //     alert(errorHandler(data.errors))
-    //   } else {
-    //     console.log("Data : ", data)
-    //     alert("Succesfully created")
-    //     setValues({})
-    //   }
-    // }).catch()
   }
 
   const handleEdit = (worker) => () => {

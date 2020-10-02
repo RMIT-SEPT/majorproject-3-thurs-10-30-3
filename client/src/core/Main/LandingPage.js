@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import "./LandingPage.scss";
-import Parallax from "parallax-js"; // Now published on NPM
-import anime from "animejs";
 import Layout from "../Layout";
 import Booking from "../BookingModal/Booking";
 import Modal from "../../Template/Modal";
@@ -42,7 +33,6 @@ const LandingPage = ({ history, location }) => {
       if (data.errors) {
         alert(errorHandler(data.errors))
       } else {
-        console.log("business data : ", data)
         setBusiness(data)
       }
     }).catch()
@@ -105,8 +95,6 @@ const LandingPage = ({ history, location }) => {
         return false
       }
     })
-
-    console.log("array : ", array)
 
     setResult(array)
   }

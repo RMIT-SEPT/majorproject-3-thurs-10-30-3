@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { signin, authenticate } from '../../API/userAPI'
-import Loader from '../Loader'
-import Parallax from 'parallax-js' // Now published on NPM
-import anime from 'animejs';
+import { signin } from '../../API/userAPI'
 import './SignIn.scss'
 import { errorHandler } from '../common/errorhandler'
 import queryString from 'query-string';
@@ -54,19 +50,7 @@ const SignIn = ({ history, visible, flipVisibility, location }) => {
                 }
             })
     }
-
-    const showError = () => {
-
-    }
-
-
-    // const ValidateEmail = (mail) => {
-    //     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-    //         return (true)
-    //     }
-    //     return (false)
-    // }
-
+  
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
             // setValues({ ...values, error: true })

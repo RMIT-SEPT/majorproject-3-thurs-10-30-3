@@ -1,18 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import UserLayout from "./WorkerLayout";
-import { createWorker, } from "../../API/workerAPI"
 import { errorHandler } from "../common/errorhandler";
 import "./WorkerHistory.scss";
 import { readCurrentUser, readUser } from "../../API/userAPI";
 import { getBusiness, cancelSchedule } from "../../API/businessAPI";
-import Modal from "../../Template/Modal"
 
 const WorkerHistory = ({ history, location }) => {
 
@@ -24,12 +15,9 @@ const WorkerHistory = ({ history, location }) => {
   const populateUser = (ss) => {
     ss.map((s, index) => {
       readUser({ userId: s.userId }).then((data) => {
-        console.log("schedules in read wokrer :", ss)
         var newArr = [...ss]
         newArr[index].user = data
         setSchedules([...newArr])
-        console.log("schedules after :", [...newArr])
-
       }).catch()
     })
   }

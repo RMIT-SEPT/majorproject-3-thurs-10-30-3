@@ -2,9 +2,8 @@ import React from 'react';
 import Authentication from './core/AuthPage/Authentication';
 import LandingPage from './core/Main/LandingPage';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import myBootstrap from './Template/GlobalCSS/myBootstrap.scss'
+import './Template/GlobalCSS/myBootstrap.scss'
 import PrivateRoute from './auth/PrivateRoute'
-import Business from './core/Business/Business'
 import SuperRoute from './auth/SuperRoute';
 import AdminRoute from './auth/AdminRoute';
 import CreateBusiness from './core/SuperPage/CreateBusiness';
@@ -36,8 +35,7 @@ function App() {
 
         <AdminRoute path="/admin/create/worker" exact component={CreateWorker} />
         <AdminRoute path="/admin/edit/worker" exact component={EditWorker} />
-        {/* <PrivateRoute path="/dashboard/tours" exact component={Tour} /> */}
-        {/* <PrivateRoute path="/dashboard/locations" exact component={LocationPage} /> */}
+
       </Switch>
     </BrowserRouter>
   );

@@ -1,11 +1,9 @@
 import express, { Request, Response } from 'express';
 import { body, check } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '../common';
 
-import { Password } from '../services/password';
 import { User } from '../models/user';
-import { currentUser, requireSuper, requireAdmin } from '../common';
+import {  requireAdmin } from '../common';
 import { WorkerCreatedPublisher } from '../common/events/worker-created-publisher'
 import { natsWrapper } from '../nats-wrapper';
 
