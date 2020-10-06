@@ -56,14 +56,18 @@ workflows:
   automated-testing:
     jobs:
       - auth-backend-test:
-        context: sept
+        context: 
+          - sept
      
       - auth-backend-build-image:
-        context: sept
+        context: 
+          - sept
        
       - auth-backend-deploy:
-        context: sept
+        context: 
+          - sept
      
       - business-backend-test:
-        context: sept
+        context: 
+          - sept
        
