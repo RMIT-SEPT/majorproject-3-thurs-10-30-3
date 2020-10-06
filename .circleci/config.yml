@@ -56,29 +56,25 @@ workflows:
   automated-testing:
     jobs:
       - auth-backend-test:
-        context: 
-          - sept
+        context: sept
         filters:
           branches:
             ignore:
               - master
       - auth-backend-build-image:
-        context: 
-          - sept
+        context: sept
         filters:
           branches:
             ignore:
               - master
       - auth-backend-deploy:
-        context: 
-          - sept
+        context: sept
         filters:
           branches:
             ignore:
               - master
       - business-backend-test:
-        context: 
-          - sept
+        context: sept
         filters:
           branches:
             ignore:
