@@ -12,8 +12,7 @@ jobs:
       - run: 
           name: Run test
           command: cd auth && npm test
-
-   auth-backend-build-image:
+  auth-backend-build-image:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -28,7 +27,7 @@ jobs:
           name: Docker image push
           command : docker push besamly2018/sept-auth
 
-   auth-backend-deploy:
+  auth-backend-deploy:
     docker:
       - image: digitalocean/action-doctl@v2
     steps:
@@ -61,12 +60,6 @@ workflows:
       - auth-backend-test:
       - auth-backend-build-image:
       - auth-backend-deploy:
-       
-      # - auth-backend-test:
-      #   filters:
-      #     branches:
-      #       ignore:
-      #         - master
       - business-backend-test:
         filters:
           branches:
