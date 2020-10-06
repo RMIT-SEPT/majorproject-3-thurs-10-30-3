@@ -56,18 +56,10 @@ workflows:
   automated-testing:
     jobs:
       - auth-backend-test:
-        context: 
-          - sept
-     
-      - auth-backend-build-image:
-        context: 
-          - sept
-       
-      - auth-backend-deploy:
-        context: 
-          - sept
-     
-      - business-backend-test:
-        context: 
-          - sept
+        context: sept
+        filters:
+          branches:
+            ignore:
+              - master
+      
        
