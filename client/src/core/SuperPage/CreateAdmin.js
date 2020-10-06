@@ -28,6 +28,7 @@ const CreateAdmin = ({ history, location }) => {
       } else {
         console.log("Data : ", data)
         alert("Succesfully created")
+        window.location.reload()
         setKeyword("")
         setValues({})
       }

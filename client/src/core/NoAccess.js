@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Layout from "./Layout";
 import './NoAccess.scss'
 

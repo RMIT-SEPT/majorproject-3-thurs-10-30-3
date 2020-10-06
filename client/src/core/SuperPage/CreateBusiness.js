@@ -51,6 +51,7 @@ const CreateBusiness = ({ history, location }) => {
         alert(errorHandler(data.errors))
       } else {
         alert("Succesfully created")
+        window.location.reload()
         setValues({})
         setServiceProvided([])
       }

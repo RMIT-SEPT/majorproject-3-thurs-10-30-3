@@ -30,6 +30,7 @@ const CreateWorker = ({ history, location }) => {
       } else {
         console.log("Data : ", data)
         alert("Succesfully created")
+        window.location.reload()
         setValues({})
       }
     }).catch()

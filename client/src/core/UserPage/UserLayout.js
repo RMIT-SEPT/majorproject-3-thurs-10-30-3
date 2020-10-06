@@ -16,7 +16,7 @@ const UserLayout = ({ history, children }) => {
             <Layout />
             <div className="first">
                 <div className="each-link" onClick={handleClick('/user/profile')}>Profile</div>
-                <div className="each-link" onClick={handleClick('/user/history')}>History</div>
+                <div className="each-link" onClick={handleClick('/user/schedule')}>Schedule</div>
             </div>
             <div className="second">
                 {children}
