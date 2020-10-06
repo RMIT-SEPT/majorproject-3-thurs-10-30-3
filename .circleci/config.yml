@@ -3,13 +3,13 @@ version: 2.1
 jobs:
   auth-backend-test:
     docker:
-      - image:  circleci/node:10
+      - image: circleci/node:10
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install npm dependencies
           command: cd auth && npm install
-      - run: 
+      - run:
           name: Run test
           command: cd auth && npm test
   auth-backend-build-image:
@@ -19,13 +19,13 @@ jobs:
       - checkout
       - run:
           name: Build image
-          command : cd auth && docker build -t besamly2018/sept-auth .
+          command: cd auth && docker build -t besamly2018/sept-auth .
       - run:
-          name: Docker login 
-          command : docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          name: Docker login
+          command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: Docker image push
-          command : docker push besamly2018/sept-auth
+          command: docker push besamly2018/sept-auth
 
   auth-backend-deploy:
     docker:
@@ -34,32 +34,29 @@ jobs:
       - checkout
       - run:
           name: Access to digital ocean context
-          command : doctl auth init --access-token $DIGITALOCEAN_ACCESS_TOKEN
+          command: doctl auth init --access-token $DIGITALOCEAN_ACCESS_TOKEN
       - run:
           name: Apply infra config
-          command : kubectl apply -f infra
+          command: kubectl apply -f infra
 
   business-backend-test:
     docker:
-      - image:  circleci/node:10
+      - image: circleci/node:10
     steps:
       - checkout
-      - run: 
+      - run:
           name: Install npm dependencies
           command: cd business && npm install
-      - run: 
+      - run:
           name: Run test
           command: cd business && npm test
-    
-      
+
 workflows:
   automated-testing:
     jobs:
       - auth-backend-test:
-        context: sept
-        filters:
-          branches:
-            ignore:
-              - master
-      
-       
+          context: sept
+          filters:
+            branches:
+              ignore:
+                - master
