@@ -58,8 +58,20 @@ workflows:
       - build:
           context: sept
       - auth-backend-test:
+        filters:
+          branches:
+            ignore:
+              - master
       - auth-backend-build-image:
+        filters:
+          branches:
+            ignore:
+              - master
       - auth-backend-deploy:
+        filters:
+            branches:
+              ignore:
+                - master
       - business-backend-test:
         filters:
           branches:
