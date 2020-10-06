@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Docker login 
           command : docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-       - run:
+      - run:
           name: Docker image push
           command : docker push besamly2018/sept-auth
 
