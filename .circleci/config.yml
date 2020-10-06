@@ -73,9 +73,9 @@ workflows:
         context: 
           - sept
         filters:
-            branches:
-              ignore:
-                - master
+          branches:
+            ignore:
+              - master
       - business-backend-test:
         context: 
           - sept
