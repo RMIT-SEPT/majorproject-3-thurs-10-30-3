@@ -60,3 +60,15 @@ workflows:
             branches:
               ignore:
                 - master
+      - auth-backend-build-image:
+          context: sept
+          filters:
+            branches:
+              ignore:
+                - master
+      - auth-backend-deploy:
+          context: sept
+          filters:
+            branches:
+              ignore:
+                - master
