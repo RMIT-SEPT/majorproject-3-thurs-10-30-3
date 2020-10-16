@@ -12,7 +12,20 @@ jobs:
       - run:
           name: Run test
           command: cd auth && npm test
-  auth-backend-build-image:
+
+  business-backend-test:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: cd business && npm install
+      - run:
+          name: Run test
+          command: cd business && npm test
+
+  auth-build-image:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -27,7 +40,22 @@ jobs:
           name: Docker image push
           command: docker push besamly2018/sept-auth
 
-  auth-backend-deploy:
+  business-build-image:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - run:
+          name: Build image
+          command: cd business && docker build -t besamly2018/sept-business .
+      - run:
+          name: Docker login
+          command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: Docker image push
+          command: docker push besamly2018/sept-business
+
+  deploy-to-cluster:
     docker:
       - image: digitalocean/action-doctl@v2
     steps:
@@ -39,18 +67,6 @@ jobs:
           name: Apply infra config
           command: kubectl apply -f infra
 
-  business-backend-test:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - run:
-          name: Install npm dependencies
-          command: cd business && npm install
-      - run:
-          name: Run test
-          command: cd business && npm test
-
 workflows:
   automated-testing:
     jobs:
@@ -60,13 +76,25 @@ workflows:
             branches:
               ignore:
                 - master
-      - auth-backend-build-image:
+      - business-backend-test:
           context: sept
           filters:
             branches:
               ignore:
                 - master
-      - auth-backend-deploy:
+      - auth-build-image:
+          context: sept
+          filters:
+            branches:
+              ignore:
+                - master
+      - business-build-image:
+          context: sept
+          filters:
+            branches:
+              ignore:
+                - master
+      - deploy-to-cluster:
           context: sept
           filters:
             branches:
