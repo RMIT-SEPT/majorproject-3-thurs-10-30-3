@@ -7,5 +7,5 @@ app.get('/', function(req, res) {
 });
 
 app.listen(3000,()=>{
-  console.log("client is listening to port 3000!!")
+  console.log("Client is listening to port 3000!!")
 });

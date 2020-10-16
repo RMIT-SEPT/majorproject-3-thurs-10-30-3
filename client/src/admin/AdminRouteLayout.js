@@ -1,10 +1,6 @@
 import React from "react";
 import Layout from "../core/Layout";
-import { isAuthenticated } from "../auth";
-import { BrowserRouter, Router, Switch, Route, Link, withRouter } from "react-router-dom";
-import AdminProductCreate from "./AdminProductCreate";
-import AdminProductManage from "./AdminProductManage";
-import AdminProductUpdate from "./AdminProductUpdate";
+import {  Link, withRouter } from "react-router-dom";
 
 const AdminRouteLayout = ({ children, history, location, keywordIn }) => {
 

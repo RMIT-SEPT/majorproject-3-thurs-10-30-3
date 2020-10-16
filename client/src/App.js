@@ -1,7 +1,7 @@
 import React from 'react';
 import Authentication from './core/AuthPage/Authentication';
 import LandingPage from './core/Main/LandingPage';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './Template/GlobalCSS/myBootstrap.scss'
 import PrivateRoute from './auth/PrivateRoute'
 import SuperRoute from './auth/SuperRoute';
@@ -24,6 +24,7 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/app/authentication" exact component={Authentication} />
         <Route path="/no/access" exact component={NoAccess} />
+        
         <PrivateRoute path="/user/schedule" exact component={UserHistory} />
         <PrivateRoute path="/user/profile" exact component={UserProfile} />
 
