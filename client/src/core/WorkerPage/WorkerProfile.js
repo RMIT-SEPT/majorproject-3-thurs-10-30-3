@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import UserLayout from "./WorkerLayout";
-import { readCurrentUser, readUser } from "../../API/userAPI";
+import { readCurrentUser } from "../../API/userAPI";
 import "./WorkerProfile.scss"
 
 const WorkerProfile = ({ history, location }) => {

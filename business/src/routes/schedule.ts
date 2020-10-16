@@ -1,11 +1,10 @@
 import express, { Request, Response } from 'express';
-import { body, check } from 'express-validator';
-import jwt from 'jsonwebtoken';
+import { check } from 'express-validator';
 import { validateRequest, BadRequestError } from '../common';
 
 import { Business } from '../models/business';
 import { Schedule } from '../models/schedule';
-import { currentUser, requireSuper, requireAdmin, requireAuth } from '../common';
+import {  requireAuth } from '../common';
 import { ScheduleCreatedPublisher } from '../common/events/schedule-created-publisher'
 import { ScheduleCanceledPublisher } from '../common/events/schedule-canceled-publisher'
 import { natsWrapper } from '../nats-wrapper';
@@ -90,10 +89,8 @@ router.post(
             userId
         });
 
-
         res.status(200).send(business);
     }
 );
-
 
 export { router as scheduleRouter };

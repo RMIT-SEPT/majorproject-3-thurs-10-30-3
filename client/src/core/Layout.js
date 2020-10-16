@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import './Layout.scss'
 import { currentUser, signout } from '../API/userAPI'
-
 
 const Layout = ({ children }) => {
 

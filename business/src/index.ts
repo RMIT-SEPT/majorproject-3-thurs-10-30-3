@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
-import { randomBytes } from 'crypto'
 import {WorkerCreatedListener} from './common/events/worker-created-listener'
 
 const MONGO_URL = 'mongodb+srv://gpgx8nell:1256ahdk@samshop.e9sdx.mongodb.net/sept'

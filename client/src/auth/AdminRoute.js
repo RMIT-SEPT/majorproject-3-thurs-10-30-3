@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import { currentUser  } from "../API/userAPI";
 
 const AdminRoute = ({ history, component, ...rest }) => {
