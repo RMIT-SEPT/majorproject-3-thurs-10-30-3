@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {  withRouter,} from "react-router-dom";
+import React from "react";
+import { withRouter, } from "react-router-dom";
 import "./SuperLayout.scss";
 import Layout from '../Layout'
 const SuperLayout = ({ history, children }) => {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import { currentUser  } from "../API/userAPI";
 
-const WorkerRoute = ({ component,history, ...rest }) => {
+const WorkerRoute = ({ component, history, ...rest }) => {
 
     currentUser().then((data) => {
         if (data.currentUser === null || data.currentUser.role !== 'worker') {

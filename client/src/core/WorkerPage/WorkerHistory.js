@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import UserLayout from "./WorkerLayout";
 import { errorHandler } from "../common/errorhandler";
 import "./WorkerHistory.scss";
 import { readCurrentUser, readUser } from "../../API/userAPI";
-import { getBusiness, cancelSchedule } from "../../API/businessAPI";
+import { getBusiness } from "../../API/businessAPI";
 
 const WorkerHistory = ({ history, location }) => {
 
