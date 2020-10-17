@@ -38,7 +38,6 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to cancel a schedu
 it('returns HTTP Error Code 401 (Unauthorised) when attempting to cancel a schedule without being logged in', async () => {
     const response = await request(app)
         .post('business/cancel/schedule/fakebusinessid')
-        .set("Cookie", global.signin())
         .send({
             scheduleId: 'fakescheduleid',
             userId: 'fakeuserid'
