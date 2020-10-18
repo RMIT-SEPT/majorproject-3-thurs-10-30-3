@@ -44,11 +44,12 @@ it('returns HTTP Error Code 200 (OK) after successfully querying a individual bu
 
 
     var businessID = setup_response.body._id;
+    var query_string = '/business/api/business/' + businessID;
 
     const response = await request(app)
-        .post('/business/api/business/' + businessID)
+        .post(query_string)
         .set("Cookie", global.signin())
         .send({});
 
-    expect(response.status).toEqual(404);
+    expect(response.status).toEqual(200);
 });
