@@ -1,0 +1,24 @@
+.user-profile-cont {
+    // width:100%;
+    // height:100%;
+
+    .profile-cont {
+        padding: 1vw;
+        background-color: white;
+        margin: 2vw;
+        border-radius: 0.3vw;
+
+        .header {
+            font-weight: 600;
+            font-size: 1.7vw;
+            margin-bottom:1.5vw;
+        }
+
+        .each-field {
+            padding: 1vw 1.7vw 1vw 1.7vw;
+            background-color: rgb(241, 238, 238);
+            border-radius: 0.3vw;
+            margin-bottom: 1vw;
+        }
+    }
+}

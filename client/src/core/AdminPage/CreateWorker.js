@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
-import SuperLayout from "./AdminLayout";
+import AdminLayout from "./AdminLayout";
 import { createWorker, } from "../../API/workerAPI"
 import { errorHandler } from "../common/errorhandler";
 import "./CreateWorker.scss";
@@ -37,6 +30,7 @@ const CreateWorker = ({ history, location }) => {
       } else {
         console.log("Data : ", data)
         alert("Succesfully created")
+        window.location.reload()
         setValues({})
       }
     }).catch()
@@ -113,11 +107,11 @@ const CreateWorker = ({ history, location }) => {
 
 
   return (
-    <SuperLayout >
+    <AdminLayout >
       <div className="super-cont row AIC JCC">
         {createAdminForm()}
       </div>
-    </SuperLayout>
+    </AdminLayout>
   );
 };
 

@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useLocation, useHistory } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import './SignUp.scss'
-import { authenticate, signup, signin } from '../../API/userAPI'
-import Parallax from 'parallax-js' // Now published on NPM
-import anime from 'animejs';
-import queryString from 'query-string';
+import { signup } from '../../API/userAPI'
 import { errorHandler } from '../common/errorhandler'
 const SignUp = ({ history, visible, flipVisibility, location }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));
@@ -52,37 +48,13 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
         e.preventDefault()
         signup({ ...values }).then(
             data => {
-                console.log("data : ", data)
                 if (data.errors) {
-                    console.log("errorHandler(data.errors): ", errorHandler(data.errors))
                     setError(errorHandler(data.errors))
                 }
                 else {
-                    alert("succesful")
+                    alert("Your account is succesfully created. Please sign in")
                 }
             })
-    }
-
-    // const signInOnSuccess = () => {
-    //     signin({ ...values }).then(
-    //         data => {
-    //             console.log("data : ", data)
-    //             if (data.error) {
-    //                 setError(data.error)
-    //             }
-    //             else {
-    //                 localStorage.setItem('jwt', JSON.stringify({ token: data.accessToken }))
-    //                 if (bookingModalOpened) {
-    //                     history.push('/?bookingModalOpened=true')
-    //                 } else {
-    //                     history.push('/')
-    //                 }
-    //             }
-    //         })
-    // }
-
-    const showError = () => {
-
     }
 
     const ValidateEmail = (mail) => {
@@ -113,16 +85,9 @@ const SignUp = ({ history, visible, flipVisibility, location }) => {
     const showForm = () => {
         return (
             <form onKeyDown={handleEnter} data-testid="signup-form" className={`signup-form`} >
-
-
                 <div className="signup-header">
-                    {/* <div>
-                        <img src="img/user.png" className="user-icon" />
-                    </div> */}
                     <div className="signup-label-main">Sign Up</div>
                 </div>
-
-
                 <div class="form-cont JCC row">
                     <div className="half">
                         <div className="each-form">

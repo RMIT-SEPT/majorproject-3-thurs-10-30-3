@@ -1,0 +1,31 @@
+.schedule-cont {
+    background-color: white;
+    padding-left: 1.5vw;
+    border-radius: 0.3vw;
+    margin:2vw;
+    padding:2vw;
+
+    .header{
+        font-size:1.8vw;
+        font-weight: 600;
+        margin-bottom:0.6vw;
+    }
+
+    .table-cont {
+        width: 70vw;
+        text-align: left;
+
+        td {
+            border-bottom: 0.1vw solid rgb(128, 128, 128);
+            padding-top:1vw !important;
+            padding-bottom:0.4vw !important;
+        }
+
+        .cancel-btn {
+            width:6vw;
+            background-color: rgb(204, 84, 84);
+            padding: 0.1vw 0.2vw 0.1vw 0.2vw !important;
+            color: white;
+        }
+    }
+}

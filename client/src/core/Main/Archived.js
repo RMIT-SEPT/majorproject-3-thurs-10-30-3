@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import "./archived.scss";
-import Parallax from "parallax-js"; // Now published on NPM
-import anime from "animejs";
 import Layout from "../Layout";
-import Booking from "../Booking";
-import Modal from "../../Template/Modal";
 import queryString from "query-string";
 
 const Archived = ({ history, location }) => {

@@ -1,21 +1,45 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-it('clears the cookie after signing out', async () => {
+// CUSTOMER SIGN OUT (user.ts)
+
+it('returns HTTP Error Code 200 (OK) on successful log out of customer account', async () => {
   await request(app)
-    .post('/api/users/signup')
+    .post('/auth/api/users/signup')
     .send({
       email: 'test@test.com',
-      password: 'password'
+      password: "password",
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678'
     })
     .expect(201);
 
-  const response = await request(app)
-    .post('/api/users/signout')
+  await request(app)
+    .post('/auth/api/users/signout')
     .send({})
     .expect(200);
+});
 
-  expect(response.get('Set-Cookie')[0]).toEqual(
-    'express:sess=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; httponly'
-  );
+// ADMIN SIGN OUT (admin.ts
+
+it('returns HTTP Error Code 200 (OK) on successful log out of admin account', async () => {
+  const response = await request(app)
+    .post('/auth/api/admin/signup')
+    .set("Cookie", global.signin())
+    .send({
+      email: 'test@test.com',
+      password: "password",
+      name: 'User Name',
+      address: '123 Street Name, Suburb',
+      phone: '012345678',
+      businessId: '01234'
+    });
+
+  expect(response.status).toEqual(201);
+
+  await request(app)
+    .post('/auth/api/users/signout')
+    .send({})
+    .expect(200);
 });

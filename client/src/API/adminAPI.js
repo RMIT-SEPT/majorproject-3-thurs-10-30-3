@@ -1,4 +1,3 @@
-
 export const createAdmin = user => {
     console.log("what is user : ", user)
     // const { email,name, password, address, phone,businessId } = req.body;

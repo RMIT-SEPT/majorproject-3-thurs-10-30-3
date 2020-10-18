@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import SuperLayout from "./SuperLayout";
-import queryString from "query-string";
 import { getListOfBusiness } from "../../API/businessAPI"
 import { createAdmin, } from "../../API/adminAPI"
 import { errorHandler } from "../common/errorhandler";
 import "./CreateAdmin.scss";
 
 const CreateAdmin = ({ history, location }) => {
-
   const [values, setValues] = useState({})
   const [error, setError] = useState("")
   const [business, setBusiness] = useState([])
@@ -37,6 +28,7 @@ const CreateAdmin = ({ history, location }) => {
       } else {
         console.log("Data : ", data)
         alert("Succesfully created")
+        window.location.reload()
         setKeyword("")
         setValues({})
       }

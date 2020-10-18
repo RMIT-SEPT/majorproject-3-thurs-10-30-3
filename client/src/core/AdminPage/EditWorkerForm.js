@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
-import SuperLayout from "./AdminLayout";
 import { createWorker, editWorker } from "../../API/workerAPI"
 import { errorHandler } from "../common/errorhandler";
 import "./EditWorkerForm.scss";
-import { currentUser } from "../../API/userAPI";
 
 const EditWorkerForm = ({ history, reference, worker }) => {
 
   const { setOpened } = reference
-  console.log("worekrs : ", worker)
   const [values, setValues] = useState({})
   const [days, setDays] = useState([])
   const [error, setError] = useState("")
@@ -33,7 +23,6 @@ const EditWorkerForm = ({ history, reference, worker }) => {
       if (data.errors) {
         alert(errorHandler(data.errors))
       } else {
-        console.log("Data : ", data)
         window.location.reload()
         
       }
@@ -107,7 +96,6 @@ const EditWorkerForm = ({ history, reference, worker }) => {
         <div className="submit-btn btn" onClick={handleSubmit}>Submit</div>
       </div>
     )
-
   }
 
 

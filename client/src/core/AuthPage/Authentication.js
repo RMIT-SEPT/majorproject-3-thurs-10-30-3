@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import './Authentication.scss'
-import { signin, authenticate, isAuthenticated } from '../../API/userAPI'
+import {  isAuthenticated } from '../../API/userAPI'
 import Loader from '../Loader'
-import Parallax from 'parallax-js' // Now published on NPM
-import anime from 'animejs';
 import SignIn from './SignIn'
 import SignUp from "./SignUp";
 
+import './Authentication.scss'
 
 const Main = ({ history }) => {
     var jwt = JSON.parse(localStorage.getItem("jwt"));

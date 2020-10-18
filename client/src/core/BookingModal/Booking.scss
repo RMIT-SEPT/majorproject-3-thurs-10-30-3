@@ -1,0 +1,83 @@
+.booking-cont {
+    padding: 3vw;
+    padding-top: 1vw;
+    .header {
+        font-weight: 600;
+        font-size: 1.7vw;
+        margin-bottom: 1.5vw;
+        margin-top: 0.6vw;
+    }
+}
+
+.content-cont {
+    > .first {
+        margin-right: 3vw;
+        .each-service {
+            margin-right: 1vw;
+        }
+    }
+    > .second {
+        .select-worker-cont {
+            .each-worker {
+                cursor: pointer;
+                padding: 0.5vw;
+                border: 0.1vw solid orange;
+                margin: 0.5vw;
+                transition: 0.1s all ease-in-out;
+
+                &:hover {
+                    background-color: orange;
+                    color: white;
+                }
+            }
+
+            .active-each-worker {
+                background-color: orange;
+                color: white;
+            }
+        }
+
+        .available-time-cont {
+            .times-cont {
+                width: 30vw;
+                max-height: 18vw;
+                overflow-y: auto;
+            }
+            .each-time {
+                cursor: pointer;
+                padding: 0.5vw;
+                border: 0.1vw solid orange;
+                margin: 0.5vw;
+                transition: 0.1s all ease-in-out;
+
+                &:hover {
+                    background-color: orange;
+                    color: white;
+                }
+            }
+
+            .active-each-time {
+                background-color: orange;
+                color: white;
+            }
+
+            .not-available-message {
+                color: red;
+            }
+        }
+
+        .submit-btn{
+            background-color:rgb(139, 139, 241);
+            margin-top:2vw;
+            color:white;
+            padding:0.5vw;
+        }
+    }
+}
+
+.react-calendar {
+    border: 0px !important;
+    .react-calendar__tile--now {
+        background-color: rgba(143, 143, 229, 0.685) !important;
+    }
+}

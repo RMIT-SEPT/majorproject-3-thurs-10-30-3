@@ -6,7 +6,6 @@ export const requireSuper = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("req.currentUser : ", req.currentUser)
 
   if (req.currentUser?.role!=='super') {
     throw new NotAuthorizedError();

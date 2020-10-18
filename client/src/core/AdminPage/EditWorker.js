@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  useLocation,
-} from "react-router-dom";
 import SuperLayout from "./AdminLayout";
-import { createWorker, } from "../../API/workerAPI"
-import { errorHandler } from "../common/errorhandler";
 import "./EditWorker.scss";
 import { currentUser, readUser } from "../../API/userAPI";
 import { getBusiness } from "../../API/businessAPI";
@@ -59,18 +50,6 @@ const EditWorker = ({ history, location }) => {
     })
   }
 
-  const handleSubmit = (e) => {
-    // createWorker({ ...values, days, businessId: user.businessId }).then(data => {
-    //   if (data.errors) {
-    //     alert(errorHandler(data.errors))
-    //   } else {
-    //     console.log("Data : ", data)
-    //     alert("Succesfully created")
-    //     setValues({})
-    //   }
-    // }).catch()
-  }
-
   const handleEdit = (worker) => () => {
     console.log("worekr : ", worker)
     setSelectedWorker(worker)
@@ -89,11 +68,11 @@ const EditWorker = ({ history, location }) => {
 
         {business.workers?.map((w, index) => {
           return (
-            <tr>
+            <tr className="tr">
               <td>{w.name}</td>
               <td>{w.email}</td>
               <td>{w.shift}</td>
-              <td>{w.days}</td>
+              <td>{w.days?.map((d) => <span>{d} </span>)}</td>
               <td className="edit-btn btn" onClick={handleEdit(w)}>Edit</td>
             </tr>
           )
@@ -112,7 +91,9 @@ const EditWorker = ({ history, location }) => {
   return (
     <SuperLayout >
       <div className="super-cont row AIC JCC">
-        {renderWorkers()}
+        <div className="edit-worker-cont">
+          {renderWorkers()}
+        </div>
       </div>
 
       <Modal opened={editFormOpened} setOpened={setEditFormOpened} options={editWorkerModalStyle}>

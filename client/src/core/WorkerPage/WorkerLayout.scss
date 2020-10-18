@@ -1,0 +1,24 @@
+.super-layout-cont {
+    > .first {
+        width: 20vw;
+        margin-top:6vw;
+        background-color: rgb(243, 243, 243);
+        // height: 87.5vh;
+        // position: fixed;
+
+        .each-link{
+            padding: 0.6vw 0.6vw 0.6vw 2vw ;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover{
+                background-color:rgb(231, 231, 231);
+            }
+        }
+    }
+
+    > .second {
+        background-color:orange;
+        width: 80vw;
+    }
+}

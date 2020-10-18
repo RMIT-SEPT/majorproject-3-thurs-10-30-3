@@ -1,0 +1,31 @@
+.confirm-cont {
+    padding: 2vw;
+
+    .header {
+        font-weight: 600;
+        font-size: 1.7vw;
+        margin-bottom: 0.8vw;
+    }
+    .detail-cont {
+        div {
+            padding: 0.5vw;
+        }
+    }
+
+    .btn-cont {
+        margin-top: 0.7vw;
+
+        .cancel-btn {
+            background-color: rgb(221, 98, 115);
+            color: white;
+            padding: 0.6vw;
+        }
+
+        .submit-btn {
+            background-color: rgb(122, 122, 228);
+            color: white;
+            padding: 0.6vw;
+            margin-right: 0.5vw;
+        }
+    }
+}
