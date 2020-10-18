@@ -8,7 +8,16 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to create a busine
         .send({
             name: 'Business Name',
             serviceType: 'Type Of Service',
-            serviceProvided: ['Service One', 'Service Two', 'Service Three']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(setup_response.status).toEqual(201);
@@ -19,7 +28,16 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to create a busine
         .send({
             name: 'Business Name',
             serviceType: 'Another Type Of Service',
-            serviceProvided: ['Service Four', 'Service Five', 'Service Six']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(response.status).toEqual(400);
@@ -31,7 +49,16 @@ it('returns HTTP Error Code 401 (Unauthorized) when attempting to create a busin
         .send({
             name: 'Business Name',
             serviceType: 'Type Of Service',
-            serviceProvided: ['Service One', 'Service Two', 'Service Three']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(response.status).toEqual(401);
@@ -43,7 +70,16 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to create business
         .set("Cookie", global.signin())
         .send({
             serviceType: 'Type Of Service',
-            serviceProvided: ['Service One', 'Service Two', 'Service Three']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(response.status).toEqual(400);
@@ -55,7 +91,16 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to create business
         .set("Cookie", global.signin())
         .send({
             name: 'Business Name',
-            serviceProvided: ['Service One', 'Service Two', 'Service Three']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(response.status).toEqual(400);
@@ -93,7 +138,16 @@ it('returns HTTP Error Code 201 (Created) when business creation succeeds', asyn
         .send({
             name: 'Business Name',
             serviceType: 'Type Of Service',
-            serviceProvided: ['Service One', 'Service Two', 'Service Three']
+            serviceProvided: [{
+                name: 'Service One',
+                time: '10'
+            }, {
+                name: 'Service Two',
+                time: '20'
+            }, {
+                name: 'Service Three',
+                time: '30'
+            }]
         });
 
     expect(response.status).toEqual(201);
