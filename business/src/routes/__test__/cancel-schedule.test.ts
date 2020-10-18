@@ -57,16 +57,3 @@ it('returns HTTP Error Code 401 (Unauthorised) when attempting to cancel a sched
 
     expect(response.status).toEqual(401);
 });
-
-it('returns HTTP Error Code 200 (OK) when successful cancel occurs', async () => {
-    const setup_response = 
-
-    const response = await request(app)
-        .post('business/api/business/cancel/schedule/21fdsf')
-        .send({
-            scheduleId: 'fakescheduleid',
-            userId: 'fakeuserid'
-        });
-
-    expect(response.status).toEqual(401);
-});
