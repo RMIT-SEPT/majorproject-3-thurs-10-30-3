@@ -13,7 +13,7 @@ it('returns HTTP Error Code 404 (Not Found) when attempting to cancel a schedule
     expect(response.status).toEqual(404);
 });
 
-it('returns HTTP Error Code 400 (Bad Request) when attempting to cancel a schedule without supplying business id', async () => {
+it('returns HTTP Error Code 404 (Bad Request) when attempting to cancel a schedule without supplying business id', async () => {
     const response = await request(app)
         .post('business/api/business/cancel/schedule/')
         .set("Cookie", global.signin())
@@ -22,7 +22,7 @@ it('returns HTTP Error Code 400 (Bad Request) when attempting to cancel a schedu
             userId: 'fakeuserid'
         });
 
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(404);
 });
 
 it('returns HTTP Error Code 400 (Bad Request) when attempting to cancel a schedule without supplying schedule id', async () => {

@@ -27,7 +27,7 @@ jobs:
 
   auth-build-image:
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run:
